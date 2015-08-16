@@ -1,0 +1,14 @@
+{
+    "name": "robertmain/rest-client",
+    "description": "A flexible pluggable REST client",
+    "type": "library",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Robert Main",
+            "email": "robert.main@abdn.ac.uk"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
