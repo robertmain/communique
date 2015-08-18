@@ -1,14 +1,18 @@
 {
-    "name": "robertmain/rest-client",
+    "name": "robertmain/communique",
     "description": "A flexible pluggable REST client",
     "type": "library",
     "license": "GPL",
     "authors": [
         {
-            "name": "Robert Main",
-            "email": "robert.main@abdn.ac.uk"
+            "name": "Robert Main"
         }
     ],
+    "autoload":{
+        "psr-4": {
+            "Communique\\": "src/"
+        }
+    },
     "minimum-stability": "stable",
     "require": {}
 }
