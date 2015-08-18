@@ -1,9 +1,9 @@
 <?php
 
 /**
- * REST SSL Exception
+ * REST Connection Exception
  *
- * Exception used for REST SSL related errors
+ * REST Exception to be used for all connection related issues.
  * 
  * @author Robert Main
  * @package Communique\lib\Exceptions
@@ -17,12 +17,12 @@ namespace Communique\lib\Exceptions;
  *
  * Exception
  *
- * This exception is thrown for errors related to SSL such as certificate errors, key errors etc.
+ * This exception is thrown for connection errors when attempting to reach the API.
  * 
  */
-class RESTSSLException extends RESTException{
+class RESTConnectionException extends RESTException{
 	/**
-	 * Constructor for REST SSL Exception
+	 * Constructor for REST Connection Exception
 	 * @param String $message A human readable description of the exception
 	 */
 	public function __construct($message){
