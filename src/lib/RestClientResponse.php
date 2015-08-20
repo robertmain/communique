@@ -6,11 +6,11 @@
  * This file contains the object intended to encapsulate all API responses.
  * 
  * @author Robert Main
- * @package Communique\lib
+ * @package Communique
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
-namespace Communique\lib;
+namespace Communique;
 
 /**
  * Response object

@@ -6,12 +6,12 @@
  * Exception used for REST SSL related errors
  * 
  * @author Robert Main
- * @package Communique\lib\Exceptions
+ * @package Communique\Exceptions
  * @category Exception
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
-namespace Communique\lib\Exceptions;
+namespace Communique\Exceptions;
 
 /**
  *

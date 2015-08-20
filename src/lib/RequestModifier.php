@@ -6,11 +6,11 @@
  * This file contains the interface that all request modifiers must implement
  * 
  * @author Robert Main
- * @package Communique\lib
+ * @package Communique
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
-namespace Communique\lib;
+namespace Communique;
 
 /**
  * Interface

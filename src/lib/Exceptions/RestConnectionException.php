@@ -6,12 +6,12 @@
  * REST Exception to be used for all connection related issues.
  * 
  * @author Robert Main
- * @package Communique\lib\Exceptions
+ * @package Communique\Exceptions
  * @category Exception
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
 
-namespace Communique\lib\Exceptions;
+namespace Communique\Exceptions;
 
 /**
  *
