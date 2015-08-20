@@ -19,7 +19,7 @@ namespace Communique;
  * is used internally, it is also made available to request interceptors for modification before the request is made.
  * 
  */
-class RestClientRequest{
+class RESTClientRequest{
 
 	/** @var String The HTTTP method to use for the request. This should be either GET|PUT|POST|DELETE */
 	public $method;

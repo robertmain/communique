@@ -26,8 +26,8 @@ interface RequestModifier{
 	 * Whilst implementing this method is mandatory, it is permitted to simply return the
 	 * request object unchanged if needed.
 	 * 
-	 * @param  RestClientRequest $request Request encapsulation object
-	 * @return RestClientRequest          Request encapsulation object
+	 * @param  RESTClientRequest $request Request encapsulation object
+	 * @return RESTClientRequest          Request encapsulation object
 	 */
 	public function request($request);
 
@@ -36,8 +36,8 @@ interface RequestModifier{
 	 * This method is used to process the response on the way back in. 
 	 * Whilst implementing this method is mandatory, it is permitted to simply return the
 	 * response object unchanged if needed.
-	 * @param  RestClientResponse $response Response encapsulation object
-	 * @return RestClientResponse           Response encapsulation object
+	 * @param  RESTClientResponse $response Response encapsulation object
+	 * @return RESTClientResponse           Response encapsulation object
 	 */
 	public function response($response);
 

@@ -19,7 +19,7 @@ namespace Communique;
  * made available to request interceptors for reading from and/or writing to. *
  * 
  */
-class RestClientResponse{
+class RESTClientResponse{
 
 	/** @var int The HTTP status code returned by the server */
 	public $status;
