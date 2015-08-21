@@ -1,9 +1,14 @@
 <?php
-class CommuniqueTest extends PHPUnit_Framework_TestCase
-{
-    public function testExample()
-    {
-        $this->assertTrue(true);
+use \Communique;
+
+class CommuniqueTest extends PHPUnit_Framework_TestCase{
+
+	public function setUp(){
+		$this->rest = new Communique('http://graph.facebook.com');
+	}
+
+    public function testCall(){
+        $this->rest->__call();
     }
 }
 ?>
