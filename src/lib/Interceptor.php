@@ -3,7 +3,7 @@
 /**
  * Request modifier
  *
- * This file contains the interface that all request modifiers must implement
+ * This file contains the interface that all interceptors must implement
  * 
  * @author Robert Main
  * @package Communique
@@ -15,10 +15,10 @@ namespace Communique;
 /**
  * Interface
  *
- * This interface is used to describe the functionality of a request modifier
+ * This interface is used to describe the functionality of an interceptor
  * 
  */
-interface RequestModifier{
+interface Interceptor{
 
 
 	/**

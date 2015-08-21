@@ -16,7 +16,7 @@ namespace Communique;
  * Response object
  *
  * This object is used to encapsulate the response from the API. Whilst it is used internally, it is also
- * made available to request interceptors for reading from and/or writing to. *
+ * made available to response interceptors for reading from and/or writing to.
  * 
  */
 class RESTClientResponse{
