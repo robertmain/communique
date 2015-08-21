@@ -1,4 +1,5 @@
 <?php
+
 /**
  * REST Exception
  *
@@ -11,6 +12,7 @@
  */
 
 namespace Communique\Exceptions;
+use \Exception;
 
 /**
  *
@@ -19,7 +21,7 @@ namespace Communique\Exceptions;
  * This exception is a general purpose exception used to handle all nondescript errors with REST calls.
  * 
  */
-class RESTException extends Exception{
+class RESTException extends \Exception{
 	/**
 	 * Constructor for general purpose REST Exception
 	 * @param String $message A human readable description of the exception
