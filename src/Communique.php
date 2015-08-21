@@ -12,6 +12,8 @@
 
 namespace Communique;
 
+use Curl;
+
 /**
  * Communique
  *
@@ -48,6 +50,7 @@ class Communique{
 	 * @return RESTClientResponse          A RESTClientResponse object encapsulating the response
 	 */
 	private function _call($request){
+		
 		return new \Communique\RESTClientResponse(200, 'BOOM!');
 	}
 }

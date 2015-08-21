@@ -22,9 +22,9 @@ interface Interceptor{
 
 
 	/**
-	 * This method is used to process the request on the way out.
-	 * Whilst implementing this method is mandatory, it is permitted to simply return the
-	 * request object unchanged if needed.
+	 * Process the outgoing request.
+	 * 
+	 * When implementing this method, it is permitted to simply return the request object unchanged if needed.
 	 * 
 	 * @param  RESTClientRequest $request Request encapsulation object
 	 * @return RESTClientRequest          Request encapsulation object
@@ -33,9 +33,10 @@ interface Interceptor{
 
 
 	/**
-	 * This method is used to process the response on the way back in. 
-	 * Whilst implementing this method is mandatory, it is permitted to simply return the
-	 * response object unchanged if needed.
+	 * Process the incoming response.
+	 * 
+	 * When implementing this method, it is permitted to simply return the request object unchanged if needed.
+	 * 
 	 * @param  RESTClientResponse $response Response encapsulation object
 	 * @return RESTClientResponse           Response encapsulation object
 	 */
