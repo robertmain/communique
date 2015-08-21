@@ -43,12 +43,11 @@ class Communique{
 	}
 
 	/**
-	 * Private method to actually perform the HTTP request
+	 * Actually makes the request
 	 * @param  RESTClientRequest  $request A RESTClientRequest object encapsulating the request
 	 * @return RESTClientResponse          A RESTClientResponse object encapsulating the response
 	 */
-	public function __call($request){
-		echo "YOU CALLED ME!";
-		return $response;
+	private function _call($request){
+		return new \Communique\RESTClientResponse(200, 'BOOM!');
 	}
 }
