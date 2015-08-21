@@ -40,7 +40,7 @@ class RESTClientRequest{
  	 * @param Mixed  $payload The payload of the request
  	 * @param Array  $headers Request headers
 	*/
-	public function __construct($method, $url, $payload, $headers = array()){
+	public function __construct($method, $url, $payload, array $headers = array()){
 		$this->method = strtoupper($method);
 		$this->url = $url;
 		$this->payload = $payload;

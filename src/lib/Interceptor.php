@@ -29,7 +29,7 @@ interface Interceptor{
 	 * @param  RESTClientRequest $request Request encapsulation object
 	 * @return RESTClientRequest          Request encapsulation object
 	 */
-	public function request($request);
+	public function request(\Communique\RESTClientRequest $request);
 
 
 	/**
@@ -40,6 +40,6 @@ interface Interceptor{
 	 * @param  RESTClientResponse $response Response encapsulation object
 	 * @return RESTClientResponse           Response encapsulation object
 	 */
-	public function response($response);
+	public function response(\Communique\RESTClientRequest $response);
 
 }

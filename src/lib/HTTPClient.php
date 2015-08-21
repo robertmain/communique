@@ -27,6 +27,6 @@ interface HTTPClient{
 	 * @param  RESTClientRequest $request Request encapsulation object
 	 * @return RESTClientResponse         Response encapsulation object
 	 */
-	public function request($request);
+	public function request(\Communique\RESTClientRequest $request);
 
 }

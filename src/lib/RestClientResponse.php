@@ -36,7 +36,7 @@ class RESTClientResponse{
 	 * @param mixed  $payload The response issued by the API
 	 * @param array  $headers Any headers returned by the server
 	 */
-	public function __construct($status, $payload, $headers = array()){
+	public function __construct($status, $payload, array $headers = array()){
 		$this->status = $status;
 		$this->payload = $payload;
 		$this->headers = $headers;

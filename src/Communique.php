@@ -39,7 +39,7 @@ class Communique{
 	 * @param String $base_url     The base URL of the API you wish to make requests to. All other paths referenced will be treated as relative to this. For example, for facebook this would be http://graph.facebook.com.
 	 * @param array $interceptors  An array of any interceptors you wish to use to modify the request. An interceptor could do anything from JSON parsing to OAuth request signing.
 	 */
-	public function __construct($base_url, $interceptors = array()){
+	public function __construct($base_url, array $interceptors = array()){
 		$this->_BASE_URL = $base_url;
 		$this->_interceptors = $interceptors;
 	}
@@ -49,7 +49,7 @@ class Communique{
 	 * @param  RESTClientRequest  $request A RESTClientRequest object encapsulating the request
 	 * @return RESTClientResponse          A RESTClientResponse object encapsulating the response
 	 */
-	private function _call($request){
+	private function _call(\Communique\RESTClientRequest $request){
 		
 		return new \Communique\RESTClientResponse(200, 'BOOM!');
 	}
