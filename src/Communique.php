@@ -3,9 +3,6 @@
 /**
  * This file is part of Communique.
  * 
- * @author Robert Main
- * @package Communique
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,9 +11,15 @@
 namespace Communique;
 
 /**
- * Communique
+ * Communique Client Library
  *
- * A pluggable, flexible REST client.
+ * HTTP Client used for making HTTP requests. This can be swapped out for another if desired.
+ * 
+ * @author Robert Main
+ * @package Communique
+ * @copyright  Robert Main
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ * 
  * 
  */
 class Communique{
@@ -69,7 +72,7 @@ class Communique{
 	 * Make an HTTP GET request
 	 * @param  String $url     The API to make the request to
 	 * @param  array  $headers Any headers you want to add to the request(optional)
-	 * @param  function $debug A function to be used for request debugging. 
+	 * @param  callable $debug A function to be used for request debugging. 
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */
@@ -83,7 +86,7 @@ class Communique{
 	 * @param  String $url     The API to make the request to
 	 * @param  array  $payload The payload of the request(any data you wish to send across)
 	 * @param  array  $headers Any headers you want to add to the request(optional)
-	 * @param  function $debug A function to be used for request debugging. 
+	 * @param  callable $debug A function to be used for request debugging. 
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */
@@ -97,7 +100,7 @@ class Communique{
 	 * @param  String $url     The API to make the request to
 	 * @param  array  $payload The payload of the request(any data you wish to send across)
 	 * @param  array  $headers Any headers you want to add to the request(optional)
-	 * @param  function $debug A function to be used for request debugging. 
+	 * @param  callable $debug A function to be used for request debugging. 
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */
@@ -111,7 +114,7 @@ class Communique{
 	 * @param  String $url     The API to make the request to
 	 * @param  array  $payload The payload of the request(any data you wish to send across)
 	 * @param  array  $headers Any headers you want to add to the request(optional)
-	 * @param  function $debug A function to be used for request debugging. 
+	 * @param  callable $debug A function to be used for request debugging. 
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */

@@ -13,11 +13,13 @@
 
 namespace Communique;
 
+use \Curl;
+
 /**
- * Response object
+ * CurlHTTP Client
  *
- * This object is used to encapsulate the response from the API. Whilst it is used internally, it is also
- * made available to response interceptors for reading from and/or writing to.
+ * This class is used internally by the main client library for performing HTTP requests using cURl. This
+ * HTTP client may be swapped out for another by passing a third argument to the library constructor.
  * 
  */
 class CurlHTTPClient implements HTTPClient{
@@ -29,13 +31,13 @@ class CurlHTTPClient implements HTTPClient{
 	 * @todo  Replace usage of the Curl library with my own raw cURL implementation
 	 */
 	public function request(\Communique\RESTClientRequest $request){
-		$curl = new Curl\Curl();
+		$curl = new \Curl\Curl();
 		foreach($request->headers as $headerKey => $headerValue){
 			$curl->setHeader($headerKey, $headerValue);
 		}
-		$curl->{$request->method}($request->url);
+		$curl->{$request->method}($request->url, $request->payload);
 
 		$curl->close();
-		return new \Communique\RESTClientResponse($curl->error_code, $curl->response, $curl_response_headers);
+		return new \Communique\RESTClientResponse($curl->error_code, $curl->response, $curl->response_headers);
 	}
 }

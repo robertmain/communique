@@ -14,9 +14,9 @@
 namespace Communique;
 
 /**
- * Response object
+ * REST Response
  *
- * This object is used to encapsulate the response from the API. Whilst it is used internally, it is also
+ * This class is used to encapsulate the response from the API. Whilst it is used internally, it is also
  * made available to response interceptors for reading from and/or writing to.
  * 
  */

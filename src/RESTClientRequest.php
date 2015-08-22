@@ -14,9 +14,9 @@
 namespace Communique;
 
 /**
- * Request object
+ * REST Request
  *
- * This object is used to encapsulate request related data such as method, url, headers etc. Whilst this object
+ * This class is used to encapsulate request related data such as method, url, headers etc. Whilst this class
  * is used internally, it is also made available to request interceptors for modification before the request is made.
  * 
  */

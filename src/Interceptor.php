@@ -41,6 +41,6 @@ interface Interceptor{
 	 * @param  RESTClientResponse $response Response encapsulation object
 	 * @return RESTClientResponse           Response encapsulation object
 	 */
-	public function response(\Communique\RESTClientRequest $response);
+	public function response(\Communique\RESTClientResponse $response);
 
 }
