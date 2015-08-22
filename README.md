@@ -1,5 +1,6 @@
 # Communique
 
+[![Build Status](https://travis-ci.org/robertmain/communique.svg?branch=master)](https://travis-ci.org/robertmain/communique)
 
 ##What is it?
 A flexible pluggable REST client using middleware. The aim of this project is to provide a REST client that is flexible enough to permit the modification of the request and response using request and response interceptors(conceptually similar to AngularJS, although implemented somewhat differently).
