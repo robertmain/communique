@@ -1,18 +1,17 @@
 <?php
 
 /**
- * Communique
- *
- * A pluggable, flexible REST client
+ * This file is part of Communique.
  * 
  * @author Robert Main
  * @package Communique
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Communique;
-
-use \Curl;
 
 /**
  * Communique
@@ -42,17 +41,17 @@ class Communique{
 
 	/**
 	 * Constructs Communique REST library.
-	 * @param String $base_url The base URL of the API you wish to make requests to. All other paths referenced will be treated as relative to this. For example, for facebook this would be http://graph.facebook.com.
+	 * @param String $base_url The base URL of the API you wish to make requests to. All other paths referenced will be treated as relative to this.
 	 * @param array $interceptors An array of any interceptors you wish to use to modify the request. An interceptor could do anything from JSON parsing to OAuth request signing.
 	 * @param \Communique\HTTPClient $http_client The HTTP client you wish to make the request with
 	 */
-	public function __construct($base_url = '', array $interceptors = array(), \Communique\HTTPClient $http_client){
+	public function __construct($base_url = '', array $interceptors = array(), $http_client = null){
 		$this->_BASE_URL = $base_url;
 		$this->_interceptors = $interceptors;
-		if($http_client == null){
-			$this->_http = new \Communique\CURLHTTPClient();
-		} else {
+		if($http_client){
 			$this->_http = $http_client;
+		} else {
+			$this->_http = new \Communique\CurlHTTPClient();
 		}
 	}
 
