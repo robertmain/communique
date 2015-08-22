@@ -11,19 +11,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Communique\Exceptions;
-use \Exception;
+namespace Communique;
 
 /**
  *
  * Exception
  *
- * This exception is a general purpose exception used to handle all nondescript errors with REST calls.
+ * This exception is thrown for connection errors when attempting to reach the API.
  * 
  */
-class RESTException extends \Exception{
+class RESTConnectionException extends RESTException{
 	/**
-	 * Constructor for general purpose REST Exception
+	 * Constructor for REST Connection Exception
 	 * @param String $message A human readable description of the exception
 	 */
 	public function __construct($message){

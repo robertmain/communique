@@ -10,7 +10,7 @@
     ],
     "autoload":{
         "psr-4": {
-            "Communique\\": "src/"
+            "Communique\\": "src"
         }
     },
     "minimum-stability": "stable",

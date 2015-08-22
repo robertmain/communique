@@ -26,6 +26,7 @@ class CurlHTTPClient implements HTTPClient{
 	 * Make an HTTP request
 	 * @param  \Communique\RESTClientRequest  $request  Request object
 	 * @return \Communique\RESTClientResponse $response Response object
+	 * @todo  Replace usage of the Curl library with my own raw cURL implementation
 	 */
 	public function request(\Communique\RESTClientRequest $request){
 		$curl = new Curl\Curl();

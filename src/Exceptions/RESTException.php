@@ -11,18 +11,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Communique\Exceptions;
+namespace Communique;
+use \Exception;
 
 /**
  *
  * Exception
  *
- * This exception is thrown for errors related to SSL such as certificate errors, key errors etc.
+ * This exception is a general purpose exception used to handle all nondescript errors with REST calls.
  * 
  */
-class RESTSSLException extends RESTException{
+class RESTException extends \Exception{
 	/**
-	 * Constructor for REST SSL Exception
+	 * Constructor for general purpose REST Exception
 	 * @param String $message A human readable description of the exception
 	 */
 	public function __construct($message){
