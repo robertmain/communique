@@ -9,7 +9,7 @@ php:
   - 7
 
 install:
-  - composer install
+  - composer install --dev
 
 script:
   - ./vendor/bin/phpunit
