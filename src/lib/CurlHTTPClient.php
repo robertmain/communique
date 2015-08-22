@@ -1,4 +1,4 @@
-<?php
+t<?php
 
 /**
  * Mock HTTP Client
@@ -19,14 +19,15 @@ namespace Communique;
  * made available to response interceptors for reading from and/or writing to.
  * 
  */
-class MockHTTPClient implements HTTPClient{
+class CurlHTTPClient implements HTTPClient{
 
 	/**
 	 * Make an HTTP request
 	 * @param  \Communique\RESTClientRequest  $request  Request object
 	 * @return \Communique\RESTClientResponse $response Response object
+	 * @todo implement this method
 	 */
 	public function request(\Communique\RESTClientRequest $request){
-		//Method stub. This gets mocked out for unit testing.
+		
 	}
 }

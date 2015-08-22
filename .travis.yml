@@ -6,17 +6,10 @@ php:
   - 5.4
   - 5.5
   - 5.6
-
-branches:
-  except:
-    - gh-pages
+  - 7
 
 install:
   - composer install
 
 script:
-  - php vendor/bin/codecept run unit --coverage-xml --env travis
-
-after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover tests/_output/coverage.xml
+  - ./vendor/bin/phpunit

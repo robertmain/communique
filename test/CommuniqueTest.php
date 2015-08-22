@@ -1,11 +1,14 @@
 <?php
 
-use \Communique;
-
 class CommuniqueTest extends PHPUnit_Framework_TestCase{
 
 	public function setUp(){
-		$this->rest = new \Communique\Communique();
+	}
+
+	public function testGet(){
+		$http_client = $this->getMockBuilder('\Communique\HTTPClient')->getMock();
+		$this->rest = new \Communique\Communique(null, array(), $http_client);
+		
 	}
 
 }

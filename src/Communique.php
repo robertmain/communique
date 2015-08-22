@@ -41,19 +41,23 @@ class Communique{
 	private $_http;
 
 	/**
-	 * Constructs Communique REST library. This constructor expects one argument(the second is optional)
+	 * Constructs Communique REST library.
 	 * @param String $base_url The base URL of the API you wish to make requests to. All other paths referenced will be treated as relative to this. For example, for facebook this would be http://graph.facebook.com.
 	 * @param array $interceptors An array of any interceptors you wish to use to modify the request. An interceptor could do anything from JSON parsing to OAuth request signing.
 	 * @param \Communique\HTTPClient $http_client The HTTP client you wish to make the request with
 	 */
-	public function __construct($base_url, array $interceptors = array(), \Communique\HTTPClient $http_client){
+	public function __construct($base_url = '', array $interceptors = array(), \Communique\HTTPClient $http_client){
 		$this->_BASE_URL = $base_url;
 		$this->_interceptors = $interceptors;
-		$this->_http = $http_client;
+		if($http_client == null){
+			$this->_http = new \Communique\CURLHTTPClient();
+		} else {
+			$this->_http = $http_client;
+		}
 	}
 
 	/**
-	 * Actually makes the request
+	 * Makes the HTTP request using the HTTP client passed into the constructor(defaults to cURL).
 	 * @param  RESTClientRequest $request A RESTClientRequest object encapsulating the request
 	 * @return RESTClientResponse A RESTClientResponse object encapsulating the response
 	 * @todo bubble the request and response through the interceptors
