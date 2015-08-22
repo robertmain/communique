@@ -1,17 +1,17 @@
 language: php
 
+sudo: false
+
 php:
-	- 5.2
-	- 5.3
-	- 5.3
-	- 5.5
-	- 5.6
-	- 7
+  - 5.2
+  - 5.3
+  - 5.3
+  - 5.5
+  - 5.6
+  - 7
 
 install:
-	- composer install -dev
+  - composer install -dev
 
 script:
-	- ./vendor/bin/phpunit
-
-sudo: false
+  - ./vendor/bin/phpunit
