@@ -63,7 +63,7 @@ namespace Communique;
  * ?>
  * ```
  * 
- * ##Custom HTTP Client
+ * ###Custom HTTP Client
  * 
  * This library ships out of the box with a cURL implementation, however if you wish to provide your own you may do so
  * using the third constructor argument as follows:
