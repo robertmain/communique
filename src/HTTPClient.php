@@ -9,6 +9,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ * 
  */
 
 namespace Communique;
@@ -28,6 +29,6 @@ interface HTTPClient{
 	 * @param  RESTClientRequest $request Request encapsulation object
 	 * @return RESTClientResponse         Response encapsulation object
 	 */
-	public function request($request);
+	public function request(\Communique\RESTClientRequest $request);
 
 }
