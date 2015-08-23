@@ -3,34 +3,13 @@
 class CommuniqueTest extends PHPUnit_Framework_TestCase{
         
     public function setUp(){
-    	$this->http_client = $this->getMockBuilder('\Communique\HTTPClient')->setMethods(array('request'))->getMock();
-        $this->http_client->expects($this->once())->method('request')->with();
+    	$this->http = $this->getMockBuilder('\Communique\HTTPClient')->setMethods(array('request'))->getMock();
     }
 
     public function testGet(){
-        $rest = new \Communique\Communique('example.com', array(), $this->http_client);
-        var_dump($this->http_client);
-    }
-
-    /**
-     * @todo  Implement this test
-     */
-    public function testPost(){
-
-    }
-
-    /**
-     * @todo  Implement this test
-     */
-    public function testPut(){
-
-    }
-
-    /**
-     * @todo  Implement this test
-     */
-    public function testDelete(){
-
+    	$rest = new \Communique\Communique('http://domain.com/', array(), $this->http);
+    	$this->http->expects($this->once())->method('request')->with($this->equalTo(new \Communique\RESTClientRequest('get', 'http://domain.com/users', 'request+payload', array())));
+    	$rest->get('users', 'request+payload');
     }
 
 }
