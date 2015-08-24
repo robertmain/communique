@@ -37,7 +37,7 @@ class Communique{
 	private $_interceptors = array();
 
 	/**
-	 * Instance of an HTTP client
+	 * An implementation of \Communique\HTTPClient
 	 * @var \Communique\HTTPClient
 	 */
 	private $_http;
@@ -59,12 +59,15 @@ class Communique{
 	}
 
 	/**
-	 * Makes the HTTP request using the HTTP client passed into the constructor(defaults to cURL).
+	 * Makes the HTTP request using the chosen HTTP client.
 	 * @param  \Communique\RESTClientRequest $request A RESTClientRequest object encapsulating the request
 	 * @return \Communique\RESTClientResponse A RESTClientResponse object encapsulating the response
 	 * @todo bubble the request and response through the interceptors
 	 */
 	protected function _call(\Communique\RESTClientRequest $request){
+		foreach($this->_interceptors as $interceptor){
+			$request = $interceptor->request($request);
+		}
 		return $this->_http->request($request);
 	}
 
