@@ -84,7 +84,7 @@ class Communique{
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */
-	public function get($url, $payload, array $headers = array(), $debug = null){
+	public function get($url, $payload = array(), array $headers = array(), $debug = null){
 		$request = new \Communique\RESTClientRequest('get', $this->_BASE_URL . $url, $payload, $headers);
 		return $this->_call($request);
 	}
@@ -126,7 +126,7 @@ class Communique{
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */
-	public function delete($url, $payload, array $headers = array(), $debug = null){
+	public function delete($url, $payload = array(), array $headers = array(), $debug = null){
 		$request = new \Communique\RESTClientRequest('delete', $this->_BASE_URL . $url, $payload, $headers);
 		return $this->_call($request);
 	}
