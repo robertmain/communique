@@ -64,7 +64,7 @@ class Communique{
 	 * @return \Communique\RESTClientResponse A RESTClientResponse object encapsulating the response
 	 * @todo bubble the request and response through the interceptors
 	 */
-	private function _call(\Communique\RESTClientRequest $request){
+	protected function _call(\Communique\RESTClientRequest $request){
 		return $this->_http->request($request);
 	}
 
