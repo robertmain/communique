@@ -68,7 +68,11 @@ class Communique{
 		foreach($this->_interceptors as $interceptor){
 			$request = $interceptor->request($request);
 		}
-		return $this->_http->request($request);
+		$response = $this->_http->request($request);
+		foreach($this->_interceptors as $interceptor){
+			$response = $interceptor->response($response);
+		}
+		return $response;
 	}
 
 	/**
