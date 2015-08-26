@@ -62,15 +62,14 @@ class Communique{
 	 * Makes the HTTP request using the chosen HTTP client.
 	 * @param  \Communique\RESTClientRequest $request A RESTClientRequest object encapsulating the request
 	 * @return \Communique\RESTClientResponse A RESTClientResponse object encapsulating the response
-	 * @todo bubble the request and response through the interceptors
 	 */
 	protected function _call(\Communique\RESTClientRequest $request){
-		foreach($this->_interceptors as $interceptor){
-			$request = $interceptor->request($request);
+		foreach($this->_interceptors as $request_interceptor){
+			$request = $request_interceptor->request($request);
 		}
 		$response = $this->_http->request($request);
-		foreach($this->_interceptors as $interceptor){
-			$response = $interceptor->response($response);
+		foreach($this->_interceptors as $response_interceptor){
+			$response = $response_interceptor->response($response);
 		}
 		return $response;
 	}

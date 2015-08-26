@@ -66,14 +66,25 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
      * 1. Check that response object has the correct payload
      */
     public function test_request_interceptor(){
+        //Create the mock interceptor
         $mockInterceptor = $this->getMockBuilder('\Communique\Interceptor')
-                                -> setMethods(array('request', 'response'))
-                                -> getMock();
+                                ->setMethods(array('request', 'response'))
+                                ->getMock();
+
+        //Set out the expectations for the stubbed request method
         $mockInterceptor->expects($this->once())
                         ->method('request')
                         ->will($this->returnCallback(function($request){
                             PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
+                            return $request;
                         }));
+        
+        //Set out the expectations for the stubbed response method. Since we aren't performing any tests on the
+        // response interceptor currently, we just want to return the response object to keep the unit tests happy
+        $mockInterceptor->expects($this->once())
+                        ->method('response')
+                        ->will($this->returnArgument(0));
+
         $rest = new \Communique\Communique($this->_TEST_BASE_URL, array($mockInterceptor), $this->http);
         $rest->get('users');
     }
