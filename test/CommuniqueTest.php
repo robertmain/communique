@@ -8,6 +8,10 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
     	$this->http = $this->getMockBuilder('\Communique\HTTPClient')
                             ->setMethods(array('request'))
                             ->getMock();
+        $this->http->method('request')
+                    ->will($this->returnCallback(function(){
+                        return new \Communique\RESTClientResponse(200, 'response+payload', array());
+                    }));
     	$this->rest = new \Communique\Communique($this->_TEST_BASE_URL, array(), $this->http);
     }
 
@@ -59,12 +63,6 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         $this->rest->delete('users', 'request+payload');
     }
 
-    /**
-     * 1. Check that the request interceptor recieved a request object 
-     * 1. Check that request object had the correct payload
-     * 1. Check that the response interceptor returns a request object
-     * 1. Check that response object has the correct payload
-     */
     public function test_request_interceptor(){
         //Create the mock interceptor
         $mockInterceptor = $this->getMockBuilder('\Communique\Interceptor')
@@ -76,6 +74,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                         ->method('request')
                         ->will($this->returnCallback(function($request){
                             PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
+                            PHPUnit_Framework_TestCase::assertEquals($request->payload, 'request+payload');
                             return $request;
                         }));
         
@@ -83,10 +82,14 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         // response interceptor currently, we just want to return the response object to keep the unit tests happy
         $mockInterceptor->expects($this->once())
                         ->method('response')
-                        ->will($this->returnArgument(0));
+                        ->will($this->returnCallback(function($response){
+                            PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientResponse', $response);
+                            PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
+                            return $response;
+                        }));
 
         $rest = new \Communique\Communique($this->_TEST_BASE_URL, array($mockInterceptor), $this->http);
-        $rest->get('users');
+        $rest->get('users', 'request+payload');
     }
 
 }
