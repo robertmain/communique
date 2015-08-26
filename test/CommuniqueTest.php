@@ -77,9 +77,27 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                             PHPUnit_Framework_TestCase::assertEquals($request->payload, 'request+payload');
                             return $request;
                         }));
+
+        //Response method just passes the response straight through, as we aren't testing that in this test
+        $mockInterceptor->expects($this->once())
+                        ->method('response')
+                        ->will($this->returnArgument(0));
         
-        //Set out the expectations for the stubbed response method. Since we aren't performing any tests on the
-        // response interceptor currently, we just want to return the response object to keep the unit tests happy
+        $rest = new \Communique\Communique($this->_TEST_BASE_URL, array($mockInterceptor), $this->http);
+        $rest->get('users', 'request+payload');
+    }
+
+    public function test_response_interceptor(){
+        //Create the mock interceptor
+        $mockInterceptor = $this->getMockBuilder('\Communique\Interceptor')
+                                ->setMethods(array('request', 'response'))
+                                ->getMock();
+
+        //Request method just passes the response straight through, as we aren't testing that in this test
+        $mockInterceptor->expects($this->once())
+                        ->method('request')
+                        ->will($this->returnArgument(0));
+        //Set out the expectations for the stubbed request method
         $mockInterceptor->expects($this->once())
                         ->method('response')
                         ->will($this->returnCallback(function($response){
@@ -87,7 +105,6 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                             PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
                             return $response;
                         }));
-
         $rest = new \Communique\Communique($this->_TEST_BASE_URL, array($mockInterceptor), $this->http);
         $rest->get('users', 'request+payload');
     }
