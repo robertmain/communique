@@ -1,8 +1,6 @@
 <?php
 
 class CommuniqueTest extends PHPUnit_Framework_TestCase{
-
-    private $_TEST_BASE_URL = 'http://domain.com/';
         
     public function setUp(){
     	$this->http = $this->getMockBuilder('\Communique\HTTPClient')
@@ -12,7 +10,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                     ->will($this->returnCallback(function(){
                         return new \Communique\RESTClientResponse(200, 'response+payload', array());
                     }));
-    	$this->rest = new \Communique\Communique($this->_TEST_BASE_URL, array(), $this->http);
+    	$this->rest = new \Communique\Communique('http://domain.com/', array(), $this->http);
     }
 
     public function test_get(){
@@ -20,7 +18,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                     ->method('request')
                     ->will($this->returnCallback(function($request){
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'GET');
-                        PHPUnit_Framework_TestCase::assertEquals($request->url, $this->_TEST_BASE_URL . 'users');
+                        PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
                     }));
 
@@ -32,7 +30,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                     ->method('request')
                     ->will($this->returnCallback(function($request){
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'PUT');
-                        PHPUnit_Framework_TestCase::assertEquals($request->url, $this->_TEST_BASE_URL . 'users');
+                        PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
                     }));
 
@@ -44,7 +42,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                     ->method('request')
                     ->will($this->returnCallback(function($request){
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'POST');
-                        PHPUnit_Framework_TestCase::assertEquals($request->url, $this->_TEST_BASE_URL . 'users');
+                        PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
                     }));
 
@@ -56,7 +54,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                     ->method('request')
                     ->will($this->returnCallback(function($request){
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'DELETE');
-                        PHPUnit_Framework_TestCase::assertEquals($request->url, $this->_TEST_BASE_URL . 'users');
+                        PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
                     }));
 
@@ -83,7 +81,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                         ->method('response')
                         ->will($this->returnArgument(0));
         
-        $rest = new \Communique\Communique($this->_TEST_BASE_URL, array($mockInterceptor), $this->http);
+        $rest = new \Communique\Communique('http://domain.com/', array($mockInterceptor), $this->http);
         $rest->get('users', 'request+payload');
     }
 
@@ -105,7 +103,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                             PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
                             return $response;
                         }));
-        $rest = new \Communique\Communique($this->_TEST_BASE_URL, array($mockInterceptor), $this->http);
+        $rest = new \Communique\Communique('http://domain.com/', array($mockInterceptor), $this->http);
         $rest->get('users', 'request+payload');
     }
 
