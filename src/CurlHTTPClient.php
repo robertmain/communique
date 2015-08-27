@@ -22,7 +22,7 @@ use \Curl;
  * HTTP client may be swapped out for another by passing a third argument to the library constructor.
  * 
  */
-class CurlHTTPClient implements HTTPClient{
+class CurlHTTPClient implements HTTPClient {
 
 	/**
 	 * Make an HTTP request
@@ -30,14 +30,20 @@ class CurlHTTPClient implements HTTPClient{
 	 * @return \Communique\RESTClientResponse $response Response object
 	 * @todo  Replace usage of the Curl library with my own raw cURL implementation
 	 */
-	public function request(\Communique\RESTClientRequest $request){
+	public function request(\Communique\RESTClientRequest $request) {
 		$curl = new \Curl\Curl();
-		foreach($request->headers as $headerKey => $headerValue){
+		foreach($request->headers as $headerKey => $headerValue) {
 			$curl->setHeader($headerKey, $headerValue);
 		}
 		$curl->{$request->method}($request->url, $request->payload);
 
+		if(gettype($curl->response_headers) == 'array'){
+			$headers = $curl->response_headers;
+		} else {
+			$headers = array();
+		}
+		$response = new \Communique\RESTClientResponse($curl->error_code, $curl->response, $headers);
 		$curl->close();
-		return new \Communique\RESTClientResponse($curl->error_code, $curl->response, $curl->response_headers);
+		return $response;
 	}
 }
