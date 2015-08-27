@@ -64,7 +64,7 @@ class Communique{
 	 * @param  callable $debug A debugging callback to be run after the request has finished. This function is expected to accept two parameters, \Communique\RESTClientRequest and \Communique\RESTClientResponse
 	 * @return \Communique\RESTClientResponse A RESTClientResponse object encapsulating the response
 	 */
-	protected function _call(\Communique\RESTClientRequest $request, $debug){
+	protected function _call(\Communique\RESTClientRequest $request, $debug = null){
 		foreach($this->_interceptors as $request_interceptor){
 			$request = $request_interceptor->request($request);
 		}
