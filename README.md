@@ -1,6 +1,7 @@
 # Communique
 
-[![Build Status](https://travis-ci.org/robertmain/communique.svg?branch=master)](https://travis-ci.org/robertmain/communique)
+[![Build Status](https://travis-ci.org/robertmain/communique.svg?branch=master)](https://travis-ci.org/robertmain/communique) 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/robertmain/communique/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/robertmain/communique/?branch=master)
 
 ##What is it?
 A flexible pluggable REST client using middleware. The aim of this project is to provide a REST client that is flexible enough to permit the modification of the request and response using request and response interceptors(conceptually similar to AngularJS, although implemented somewhat differently).
@@ -10,9 +11,11 @@ A flexible pluggable REST client using middleware. The aim of this project is to
 ###Typical Usage
 You can make a request with the REST library using the code below. It is worth noting, the get, put, post, delete etc. methods 
 do not return the raw response payload, but an encapsulation object of type \Communique\RESTClientResponse. This object contains
+
 1. The HTTP status code (200, 201, 404, 500 etc.)
 1. The response payload (the response body from the server)
 1. The server headers (any headers that the server returned with the payload, these are often useful for cache control).
+
 You can find more information from the [\Communique\RESTClientResponse](Communique.RESTClientResponse.html) documentation
 
 ```php
@@ -40,7 +43,7 @@ argumment to Communique. Interceptors should implement the [\Communique\Intercep
 
 ```php
 <?php
-     $rest = new \Communique\Communiqe('http://api.company.com/', array(new JSONParser(), new OAuth()));
+     $rest = new \Communique\Communique('http://api.company.com/', array(new JSONParser(), new OAuth()));
      // Use the library as before
 ?>
 ```
@@ -49,7 +52,7 @@ This library ships out of the box with a cURL implementation, however if you wis
 using the third constructor argument as follows:
 ```php
 <?php
-    $rest = new \Communique\Communiqe('http://api.company.com/', array(new JSONParser(), new OAuth()), new CustomHTTPClient());
+    $rest = new \Communique\Communique('http://api.company.com/', array(new JSONParser(), new OAuth()), new CustomHTTPClient());
     // Use the library as before
 ?>
 ```
