@@ -20,7 +20,7 @@ namespace Communique;
  * is used internally, it is also made available to request interceptors for modification before the request is made.
  * 
  */
-class RESTClientRequest{
+class RESTClientRequest {
 
 	/** @var String The HTTTP method to use for the request. This should be either GET|PUT|POST|DELETE */
 	public $method;
@@ -41,7 +41,7 @@ class RESTClientRequest{
  	 * @param Mixed  $payload The payload of the request
  	 * @param Array  $headers Request headers
 	*/
-	public function __construct($method, $url, $payload, array $headers = array()){
+	public function __construct($method, $url, $payload, array $headers = array()) {
 		$this->method = strtoupper($method);
 		$this->url = $url;
 		$this->payload = $payload;

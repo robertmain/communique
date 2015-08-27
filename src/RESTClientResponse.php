@@ -20,7 +20,7 @@ namespace Communique;
  * made available to response interceptors for reading from and/or writing to.
  * 
  */
-class RESTClientResponse{
+class RESTClientResponse {
 
 	/** @var int The HTTP status code returned by the server */
 	public $status;
@@ -37,7 +37,7 @@ class RESTClientResponse{
 	 * @param mixed  $payload The response issued by the API
 	 * @param array  $headers Any headers returned by the server
 	 */
-	public function __construct($status, $payload, array $headers = array()){
+	public function __construct($status, $payload, array $headers = array()) {
 		$this->status = $status;
 		$this->payload = $payload;
 		$this->headers = $headers;
@@ -48,7 +48,7 @@ class RESTClientResponse{
 	 * @param  String $key The key of the header to return
 	 * @return mixed       The value of the requested header
 	 */
-	public function get_header($key){
+	public function get_header($key) {
 		return $this->headers[$key];
 	}
 }

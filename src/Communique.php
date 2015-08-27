@@ -22,7 +22,7 @@ namespace Communique;
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * 
  */
-class Communique{
+class Communique {
 
 	/**
 	 * The base path of the API. All other API paths will be used relative to this
@@ -32,7 +32,7 @@ class Communique{
 
 	/**
 	 * An array of interceptors used for processing the requests
-	 * @var String
+	 * @var Array
 	 */	
 	private $_interceptors = array();
 
@@ -48,10 +48,10 @@ class Communique{
 	 * @param array $interceptors An array of any interceptors you wish to use to modify the request. An interceptor could do anything from JSON parsing to OAuth request signing.
 	 * @param \Communique\HTTPClient $http_client The HTTP client you wish to make the request with
 	 */
-	public function __construct($base_url = '', array $interceptors = array(), $http_client = null){
+	public function __construct($base_url = '', array $interceptors = array(), $http_client = null) {
 		$this->_BASE_URL = $base_url;
 		$this->_interceptors = $interceptors;
-		if($http_client){
+		if ($http_client) {
 			$this->_http = $http_client;
 		} else {
 			$this->_http = new \Communique\CurlHTTPClient();
@@ -61,15 +61,19 @@ class Communique{
 	/**
 	 * Makes the HTTP request using the chosen HTTP client.
 	 * @param  \Communique\RESTClientRequest $request A RESTClientRequest object encapsulating the request
+	 * @param  callable $debug A debugging callback to be run after the request has finished. This function is expected to accept two parameters, \Communique\RESTClientRequest and \Communique\RESTClientResponse
 	 * @return \Communique\RESTClientResponse A RESTClientResponse object encapsulating the response
 	 */
-	protected function _call(\Communique\RESTClientRequest $request){
-		foreach($this->_interceptors as $request_interceptor){
+	protected function _call(\Communique\RESTClientRequest $request, $debug = null) {
+		foreach ($this->_interceptors as $request_interceptor) {
 			$request = $request_interceptor->request($request);
 		}
 		$response = $this->_http->request($request);
-		foreach($this->_interceptors as $response_interceptor){
+		foreach ($this->_interceptors as $response_interceptor) {
 			$response = $response_interceptor->response($response);
+		}
+		if ($debug) {
+			$debug($request, $response);
 		}
 		return $response;
 	}
@@ -83,9 +87,9 @@ class Communique{
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */
-	public function get($url, $payload = array(), array $headers = array(), $debug = null){
+	public function get($url, $payload = array(), array $headers = array(), $debug = null) {
 		$request = new \Communique\RESTClientRequest('get', $this->_BASE_URL . $url, $payload, $headers);
-		return $this->_call($request);
+		return $this->_call($request, $debug);
 	}
 
 	/**
@@ -97,9 +101,9 @@ class Communique{
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */
-	public function put($url, $payload, array $headers = array(), $debug = null){
+	public function put($url, $payload, array $headers = array(), $debug = null) {
 		$request = new \Communique\RESTClientRequest('put', $this->_BASE_URL . $url, $payload, $headers);
-		return $this->_call($request);
+		return $this->_call($request, $debug);
 	}
 
 	/**
@@ -111,9 +115,9 @@ class Communique{
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */
-	public function post($url, $payload, array $headers = array(), $debug = null){
+	public function post($url, $payload, array $headers = array(), $debug = null) {
 		$request = new \Communique\RESTClientRequest('post', $this->_BASE_URL . $url, $payload, $headers);
-		return $this->_call($request);
+		return $this->_call($request, $debug);
 	}
 
 	/**
@@ -125,8 +129,8 @@ class Communique{
 	 * This function should accept two parameters, one for the request object one for the response object.
 	 * @return \Communique\RESTClientResponse  REST response encapsulation object
 	 */
-	public function delete($url, $payload = array(), array $headers = array(), $debug = null){
+	public function delete($url, $payload = array(), array $headers = array(), $debug = null) {
 		$request = new \Communique\RESTClientRequest('delete', $this->_BASE_URL . $url, $payload, $headers);
-		return $this->_call($request);
+		return $this->_call($request, $debug);
 	}
 }
