@@ -61,15 +61,19 @@ class Communique{
 	/**
 	 * Makes the HTTP request using the chosen HTTP client.
 	 * @param  \Communique\RESTClientRequest $request A RESTClientRequest object encapsulating the request
+	 * @param  callable $debug A debugging callback to be run after the request has finished. This function is expected to accept two parameters, \Communique\RESTClientRequest and \Communique\RESTClientResponse
 	 * @return \Communique\RESTClientResponse A RESTClientResponse object encapsulating the response
 	 */
-	protected function _call(\Communique\RESTClientRequest $request){
+	protected function _call(\Communique\RESTClientRequest $request, $debug){
 		foreach($this->_interceptors as $request_interceptor){
 			$request = $request_interceptor->request($request);
 		}
 		$response = $this->_http->request($request);
 		foreach($this->_interceptors as $response_interceptor){
 			$response = $response_interceptor->response($response);
+		}
+		if($debug){
+			$debug($request, $response);
 		}
 		return $response;
 	}
@@ -85,7 +89,7 @@ class Communique{
 	 */
 	public function get($url, $payload = array(), array $headers = array(), $debug = null){
 		$request = new \Communique\RESTClientRequest('get', $this->_BASE_URL . $url, $payload, $headers);
-		return $this->_call($request);
+		return $this->_call($request, $debug);
 	}
 
 	/**
@@ -99,7 +103,7 @@ class Communique{
 	 */
 	public function put($url, $payload, array $headers = array(), $debug = null){
 		$request = new \Communique\RESTClientRequest('put', $this->_BASE_URL . $url, $payload, $headers);
-		return $this->_call($request);
+		return $this->_call($request, $debug);
 	}
 
 	/**
@@ -113,7 +117,7 @@ class Communique{
 	 */
 	public function post($url, $payload, array $headers = array(), $debug = null){
 		$request = new \Communique\RESTClientRequest('post', $this->_BASE_URL . $url, $payload, $headers);
-		return $this->_call($request);
+		return $this->_call($request, $debug);
 	}
 
 	/**
@@ -127,6 +131,6 @@ class Communique{
 	 */
 	public function delete($url, $payload = array(), array $headers = array(), $debug = null){
 		$request = new \Communique\RESTClientRequest('delete', $this->_BASE_URL . $url, $payload, $headers);
-		return $this->_call($request);
+		return $this->_call($request, $debug);
 	}
 }
