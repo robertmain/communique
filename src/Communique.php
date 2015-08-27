@@ -32,7 +32,7 @@ class Communique{
 
 	/**
 	 * An array of interceptors used for processing the requests
-	 * @var String
+	 * @var Array
 	 */	
 	private $_interceptors = array();
 
