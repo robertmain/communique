@@ -43,7 +43,7 @@ argumment to Communique. Interceptors should implement the [\Communique\Intercep
 
 ```php
 <?php
-     $rest = new \Communique\Communiqe('http://api.company.com/', array(new JSONParser(), new OAuth()));
+     $rest = new \Communique\Communique('http://api.company.com/', array(new JSONParser(), new OAuth()));
      // Use the library as before
 ?>
 ```
@@ -52,7 +52,7 @@ This library ships out of the box with a cURL implementation, however if you wis
 using the third constructor argument as follows:
 ```php
 <?php
-    $rest = new \Communique\Communiqe('http://api.company.com/', array(new JSONParser(), new OAuth()), new CustomHTTPClient());
+    $rest = new \Communique\Communique('http://api.company.com/', array(new JSONParser(), new OAuth()), new CustomHTTPClient());
     // Use the library as before
 ?>
 ```
