@@ -32,12 +32,12 @@ class CurlHTTPClient implements HTTPClient {
 	 */
 	public function request(\Communique\RESTClientRequest $request) {
 		$curl = new \Curl\Curl();
-		foreach($request->headers as $headerKey => $headerValue) {
+		foreach ($request->headers as $headerKey => $headerValue) {
 			$curl->setHeader($headerKey, $headerValue);
 		}
 		$curl->{$request->method}($request->url, $request->payload);
 
-		if(gettype($curl->response_headers) == 'array'){
+		if (gettype($curl->response_headers) == 'array') {
 			$headers = $curl->response_headers;
 		} else {
 			$headers = array();
