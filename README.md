@@ -10,13 +10,13 @@ A flexible pluggable REST client using middleware. The aim of this project is to
 
 ###Typical Usage
 You can make a request with the REST library using the code below. It is worth noting, the get, put, post, delete etc. methods 
-do not return the raw response payload, but an encapsulation object of type \Communique\RESTClientResponse. This object contains
+do not return the raw response payload, but an encapsulation object of type [\Communique\RESTClientResponse](http://robertmain.github.io/communique/classes/Communique.RESTClientResponse.html). This object contains
 
 1. The HTTP status code (200, 201, 404, 500 etc.)
 1. The response payload (the response body from the server)
 1. The server headers (any headers that the server returned with the payload, these are often useful for cache control).
 
-You can find more information from the [\Communique\RESTClientResponse](Communique.RESTClientResponse.html) documentation
+You can find more information from the [\Communique\RESTClientResponse](http://robertmain.github.io/communique/classes/Communique.RESTClientResponse.html) documentation
 
 ```php
 <?php
@@ -39,7 +39,7 @@ and each the response interceptor method is called on each response. This allows
 they are sent and just after they are retured. This allows for things like JSON parsing, OAuth request signing or caching.
 Interceptors are executed in the order in which they are provided.
 If you wish to add an interceptor, you may do so by passing an array with an instance of your interceptor as the second constructor
-argumment to Communique. Interceptors should implement the [\Communique\Interceptor](Communique.Interceptor.html) interface
+argumment to Communique. Interceptors should implement the [\Communique\Interceptor](http://robertmain.github.io/communique/classes/Communique.Interceptor.html) interface
 
 ```php
 <?php
