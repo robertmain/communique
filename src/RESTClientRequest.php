@@ -35,12 +35,12 @@ class RESTClientRequest {
 	public $headers;
 
 	/**
- 	 * Request object constructor. Request properties should be set here (rather than just setting the object properties directly).
- 	 * @param String $method  The HTTP method you wish to use for the request
- 	 * @param String $url     The URL path to make the request to (relative to the API base path)
- 	 * @param Mixed  $payload The payload of the request
- 	 * @param Array  $headers Request headers
-	*/
+	 * Request object constructor. Request properties should be set here (rather than just setting the object properties directly).
+	 * @param String $method  The HTTP method you wish to use for the request
+	 * @param String $url     The URL path to make the request to (relative to the API base path)
+	 * @param Mixed  $payload The payload of the request
+	 * @param Array  $headers Request headers
+	 */
 	public function __construct($method, $url, $payload, array $headers = array()) {
 		$this->method = strtoupper($method);
 		$this->url = $url;
