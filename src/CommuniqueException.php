@@ -18,12 +18,12 @@ use \Exception;
  *
  * Exception
  *
- * This exception is a general purpose exception used to handle all nondescript errors with REST calls.
+ * This exception is thrown when problems within the library occur. For example, an interceptor that does not implement the Interceptor interface
  * 
  */
-class RESTException extends \Exception {
+class CommuniqueException extends \Exception {
 	/**
-	 * Constructor for general purpose REST Exception
+	 * Constructor for general purpose exception
 	 * @param String $message A human readable description of the exception
 	 */
 	public function __construct($message) {

@@ -62,14 +62,21 @@ class Communique {
 	 * Makes the HTTP request using the chosen HTTP client.
 	 * @param  \Communique\RESTClientRequest $request A RESTClientRequest object encapsulating the request
 	 * @param  callable $debug A debugging callback to be run after the request has finished. This function is expected to accept two parameters, \Communique\RESTClientRequest and \Communique\RESTClientResponse
+	 * @throws \Communique\CommuniqueException
 	 * @return \Communique\RESTClientResponse A RESTClientResponse object encapsulating the response
 	 */
 	protected function _call(\Communique\RESTClientRequest $request, $debug = null) {
 		foreach ($this->_interceptors as $request_interceptor) {
+			if(!is_object($request_interceptor) && !$request_interceptor instanceof \Communique\Interceptor){
+				throw new \Communique\CommuniqueException('Invalid request interceptor');				
+			}
 			$request = $request_interceptor->request($request);
 		}
 		$response = $this->_http->request($request);
 		foreach ($this->_interceptors as $response_interceptor) {
+			if(!is_object($response_interceptor) && !$response_interceptor instanceof \Communique\Interceptor){
+				throw new \Communique\CommuniqueException('Invalid response interceptor');				
+			}
 			$response = $response_interceptor->response($response);
 		}
 		if ($debug) {
