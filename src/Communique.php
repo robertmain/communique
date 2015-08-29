@@ -67,14 +67,14 @@ class Communique {
 	 */
 	protected function _call(\Communique\RESTClientRequest $request, $debug = null) {
 		foreach ($this->_interceptors as $request_interceptor) {
-			if(!typeof($request_interceptor) == '\Communique\Interceptor'){
+			if(!is_object($request_interceptor) && !$request_interceptor instanceof \Communique\Interceptor){
 				throw new \Communique\CommuniqueException('Invalid request interceptor');				
 			}
 			$request = $request_interceptor->request($request);
 		}
 		$response = $this->_http->request($request);
 		foreach ($this->_interceptors as $response_interceptor) {
-			if(!typeof($response_interceptor) == '\Communique\Interceptor'){
+			if(!is_object($response_interceptor) && !$response_interceptor instanceof \Communique\Interceptor){
 				throw new \Communique\CommuniqueException('Invalid response interceptor');				
 			}
 			$response = $response_interceptor->response($response);

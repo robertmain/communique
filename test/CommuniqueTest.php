@@ -107,4 +107,10 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         $rest->get('users', 'request+payload');
     }
 
+    public function test_interceptor_type_checking(){
+        $rest = new \Communique\Communique('http://domain.com/', array('bad value'), $this->http);
+        $this->setExpectedException('\Communique\CommuniqueException');
+        $rest->get('users');
+    }
+
 }
