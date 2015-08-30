@@ -1,11 +1,14 @@
 {
     "name": "robertmain/communique",
-    "description": "A flexible pluggable REST client",
     "type": "library",
+    "description": "A flexible pluggable REST client",
+    "keywords": ["rest", "api", "oauth", "curl", "web", "services"],
     "license": "GPL",
     "authors": [
         {
-            "name": "Robert Main"
+            "name": "Robert Main",
+            "homepage": "http://github.com/robertmain",
+            "role": "Owner"
         }
     ],
     "autoload":{
