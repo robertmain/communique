@@ -112,4 +112,12 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         $rest = new \Communique\Communique('http://domain.com/', array('bad value'), $this->http);
     }
 
+
+    public function test_debug_function_is_called(){
+        $rest = new \Communique\Communique('http://domain.com/', array(), $this->http);
+        $rest->get('users', array(), array(), function($request, $response){
+            PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
+            PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientResponse', $response);
+        });
+    }
 }
