@@ -56,8 +56,8 @@ class Communique {
 		} else {
 			$this->_http = new \Communique\CurlHTTPClient();
 		}
-		foreach($this->_interceptors as $interceptor){
-			if(!$interceptor instanceof \Communique\Interceptor){
+		foreach ($this->_interceptors as $interceptor) {
+			if (!$interceptor instanceof \Communique\Interceptor) {
 				throw new \Communique\CommuniqueException('Invalid request interceptor provided');
 			}
 		}
