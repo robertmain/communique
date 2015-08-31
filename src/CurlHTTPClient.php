@@ -24,13 +24,20 @@ use \Curl;
  */
 class CurlHTTPClient implements HTTPClient {
 
+	private $curl;
+
+	public function __construct(){
+		$this->curl = curl_init();
+	}
+
 	/**
 	 * Make an HTTP request
 	 * @param  \Communique\RESTClientRequest  $request  Request object
 	 * @return \Communique\RESTClientResponse $response Response object
 	 */
 	public function request(\Communique\RESTClientRequest $request) {
-		$curl = new \Curl\Curl();
+		curl_reset($this->curl);
+		/*$curl = new \Curl\Curl();
 		foreach ($request->headers as $headerKey => $headerValue) {
 			$curl->setHeader($headerKey, $headerValue);
 		}
@@ -43,6 +50,28 @@ class CurlHTTPClient implements HTTPClient {
 		}
 		$response = new \Communique\RESTClientResponse($curl->error_code, $curl->response, $headers);
 		$curl->close();
-		return $response;
+		return $response;*/
+		curl_setopt_array($this->curl, array(
+			CURL_RETURNTRANSFER => 1,
+			CURLOPT_URL => $requst->url
+		));
+
+		//Execute the request
+		$result = curl_exec($this->rest);
+		switch($result){
+			case true:
+
+				break;
+			case false:
+				throw new \Communique\CommuniqueRESTException(curl_error($this->curl) . ' cURL Error: ' . curl_errorno($this->curl));
+				break;
+			default:
+				return $result;
+				break;
+		}
+	}
+
+	private function __destruct(){
+		curl_close($this->curl);
 	}
 }

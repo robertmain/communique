@@ -18,7 +18,6 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "curl/curl": "^1.2"
     },
     "require-dev": {
         "phpdocumentor/phpdocumentor": "^2.8",
