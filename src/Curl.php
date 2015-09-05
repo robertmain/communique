@@ -59,6 +59,38 @@ class Curl{
 	}
 
 	/**
+	 * Gets cURL version information
+	 * @see  http://php.net/manual/en/function.curl-version.php Official PHP documentation for curl_version()
+	 * @param  int $age 
+	 * @return array Returns an asociative array with information regarding the version of cURL in question
+	 */
+	public static function version($age = CURLVERSION_NOW){
+		return curl_version($age);
+	}
+
+	/**
+	 * Return string describing the given error code
+	 * @see  http://php.net/manual/en/function.curl-strerror.php Official PHP documentation for curl_strerror()
+	 * @param  int $errornum One of the [cURL error codes](http://curl.haxx.se/libcurl/c/libcurl-errors.html) constants
+	 * @return string Returns error description or NULL for invalid error code.
+	 */
+	public static function strerror($errornum){
+		return curl_strerror($errornum);
+	}
+
+	/**
+	 * Create a CURLFile object
+	 * @see  http://php.net/manual/en/function.curl-file-create.php Official PHP documentation for curl_file_create()
+	 * @param  string $filename Path to the file which will be uploaded
+	 * @param  string $mimetype Mimetype of the file
+	 * @param  string $postname Name of the file to be used in the upload data
+	 * @return \CURLFile           Returns a CURLFile object
+	 */
+	public static function file_create($filename, $mimetype = '', $postname = ''){
+		return curl_file_create($filename, $mimetype, $postname);
+	}
+
+	/**
 	 * Return the last error number
 	 * @see  http://php.net/manual/en/function.curl-errno.php Official PHP documentation for curl_errno()
 	 * @return int Returns the error number or 0 (zero) if no error ocurred.
@@ -93,18 +125,6 @@ class Curl{
 	 */
 	public function exec(){
 		return curl_exec($this->_ch);
-	}
-
-	/**
-	 * Create a CURLFile object
-	 * @see  http://php.net/manual/en/function.curl-file-create.php Official PHP documentation for curl_file_create()
-	 * @param  string $filename Path to the file which will be uploaded
-	 * @param  string $mimetype Mimetype of the file
-	 * @param  string $postname Name of the file to be used in the upload data
-	 * @return \CURLFile           Returns a CURLFile object
-	 */
-	public function file_create($filename, $mimetype = '', $postname = ''){
-		return curl_file_create($filename, $mimetype, $postname);
 	}
 
 	/**
@@ -174,7 +194,7 @@ class Curl{
 	/**
 	 * Pause an unpause a connection
 	 * @see  http://php.net/manual/en/function.curl-pause.php Official PHP documentation for curl_pause()
-	 * @param  int $bitmask One of the **CURLPAUSE_* ** constants
+	 * @param  int $bitmask One of the **CURLPAUSE_\*** constants
 	 * @return int Returns an error code (**CURLE_OK** for no error)
 	 */
 	public function pause($bitmask){
@@ -204,16 +224,6 @@ class Curl{
 	}
 
 	/**
-	 * Return string describing the given error code
-	 * @see  http://php.net/manual/en/function.curl-strerror.php Official PHP documentation for curl_strerror()
-	 * @param  int $errornum One of the [cURL error codes](http://curl.haxx.se/libcurl/c/libcurl-errors.html) constants
-	 * @return string Returns error description or NULL for invalid error code.
-	 */
-	public function strerror($errornum){
-		return curl_strerror($errornum);
-	}
-
-	/**
 	 * Decodes the given URL encoded string
 	 * @see  http://php.net/manual/en/function.curl-unescape.php Official PHP documentation for curl_unescape()
 	 * @param  string $str The URL encoded string to be decoded
@@ -221,17 +231,6 @@ class Curl{
 	 */
 	public function unescape($str){
 		return curl_unescape($this->_ch, $str);
-	}
-
-
-	/**
-	 * Gets cURL version information
-	 * @see  http://php.net/manual/en/function.curl-version.php Official PHP documentation for curl_version()
-	 * @param  int $age 
-	 * @return array Returns an asociative array with information regarding the version of cURL in question
-	 */
-	public function version($age = CURLVERSION_NOW){
-		return curl_version($age);
 	}
 
 	/**
