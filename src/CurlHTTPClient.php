@@ -20,14 +20,26 @@ use \Curl;
  *
  * This class is used internally by the main client library for performing HTTP requests using cURl. This
  * HTTP client may be swapped out for another by passing a third argument to the library constructor.
- * 
  */
 class CurlHTTPClient implements HTTPClient {
-
+	/**
+	 * A reference to the cURL wrapper we're using
+	 * @var Object
+	 */
 	private $curl;
 
-	public function __construct(){
-		$this->curl = curl_init();
+	/**
+	 * Constructs the Curl HTTP adapter
+	 * @param \Communique\Curl $curl A cURL object wrapper
+	 */
+	public function __construct(\Communique\Curl $curl = null){
+		if($curl){
+			$this->curl = $curl;
+		} else {
+			//@codeCoverageIgnoreStart
+			$this->curl = new \Communique\Curl();
+			//@codeCoverageIgnoreEnd
+		}
 	}
 
 	/**
@@ -36,42 +48,30 @@ class CurlHTTPClient implements HTTPClient {
 	 * @return \Communique\RESTClientResponse $response Response object
 	 */
 	public function request(\Communique\RESTClientRequest $request) {
-		curl_reset($this->curl);
-		/*$curl = new \Curl\Curl();
-		foreach ($request->headers as $headerKey => $headerValue) {
-			$curl->setHeader($headerKey, $headerValue);
-		}
-		$curl->{$request->method}($request->url, $request->payload);
-
-		if (gettype($curl->response_headers) == 'array') {
-			$headers = $curl->response_headers;
-		} else {
-			$headers = array();
-		}
-		$response = new \Communique\RESTClientResponse($curl->error_code, $curl->response, $headers);
-		$curl->close();
-		return $response;*/
-		curl_setopt_array($this->curl, array(
-			CURL_RETURNTRANSFER => 1,
-			CURLOPT_URL => $requst->url
+		$this->curl->set_opt_array(array(
+			CURLOPT_URL => $request->url,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_HEADER => true
 		));
 
-		//Execute the request
-		$result = curl_exec($this->rest);
-		switch($result){
-			case true:
+		//Set the cURL user agent
+		$this->curl->set_opt(CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
 
-				break;
-			case false:
-				throw new \Communique\CommuniqueRESTException(curl_error($this->curl) . ' cURL Error: ' . curl_errorno($this->curl));
-				break;
+		switch($request->method){
+			case 'POST':
+			break;
+
+			case 'PUT':
+			break;
+
+			case 'DELETE':
+			break;
+
 			default:
-				return $result;
-				break;
-		}
-	}
+			case 'GET':
 
-	private function __destruct(){
-		curl_close($this->curl);
+			break;
+		}
+
 	}
 }
