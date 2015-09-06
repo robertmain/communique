@@ -52,7 +52,7 @@ class CurlHTTPClient implements HTTPClient {
 		foreach($request->headers as $header_key => $header_value){
 			$headers[] = $header_key . ': ' . $header_value;
 		}
-		
+
 		$this->curl->setopt_array(array(
 			CURLOPT_URL => $request->url,
 			CURLOPT_RETURNTRANSFER => true,
@@ -82,10 +82,15 @@ class CurlHTTPClient implements HTTPClient {
 			break;
 
 			case 'DELETE':
+				if($payload = http_build_query($request->payload)){
+					$payload = '?' . $payload;
+				} else {
+					$payload = '';
+				}
 				$this->curl->setopt_array(
 					array(
 						CURLOPT_CUSTOMREQUEST => 'DELETE',
-						CURLOPT_URL => $request->url
+						CURLOPT_URL => $request->url . $payload
 					)
 				);
 			break;
