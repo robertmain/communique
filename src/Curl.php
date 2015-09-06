@@ -58,6 +58,20 @@ class Curl{
 		$this->_ch = curl_copy_handle($this->_ch);
 	}
 
+	private static function headers_to_array($headerContent){
+	    $headers = array();
+	    $arrRequests = explode("\r\n\r\n", $headerContent);
+        foreach(explode("\r\n", $arrRequests[0]) as $i => $line){
+            if($i === 0){
+                $headers['http_code'] = $line;
+            } else {
+                list($key, $value) = explode(': ', $line);
+                $headers[$key] = $value;
+            }
+        }
+	    return $headers;
+	}
+
 	/**
 	 * Gets cURL version information
 	 * @see  http://php.net/manual/en/function.curl-version.php Official PHP documentation for curl_version()
@@ -124,7 +138,16 @@ class Curl{
 	 * @return boolean|mixed     Returns **TRUE** on success or **FALSE** on failiure. However, if the **CURLOPT_RETURNTANSFER** option is set, it will return the result on success, **FALSE** on failiure	 
 	 */
 	public function exec(){
-		return curl_exec($this->_ch);
+		if($response = curl_exec($this->_ch)){
+			$header_size = $this->getinfo(CURLINFO_HEADER_SIZE);
+			return array(
+				'http_status_code' => $this->getinfo(CURLINFO_HTTP_CODE),
+				'body' => substr($response, $header_size),
+				'headers' => self::headers_to_array(substr($response, 0, $header_size))
+			);
+		} else {
+			return false;
+		}
 	}
 
 	/**
