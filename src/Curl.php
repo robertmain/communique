@@ -18,25 +18,26 @@ namespace Communique;
  *
  * This class is used to provide an object wrapper around cURL
  * 
- * @codeCoverageIgnore This file is ignored by PHPUnit code coverage
  */
-
+/**
+ * @codeCoverageIgnore
+ */
 class Curl{
 
 	/**
 	 * A cURL handle created when the object is constructed
 	 * @var Object
 	 */
-	private $_ch;
+	private $_ch = null;
 
 	/**
 	 * Constructs the cURL object wrapper
 	 * @param  string $url If provided, the **CURLOPT_URL** option will be set to its value. You can manually set this using the `setopt()` method.
-	 * @throws \ErrorException
+	 * @throws \Communique\CommuniqueRESTConnectionException
 	 */
 	public function __construct($url = null){
 		if(!extension_loaded('curl')){
-			throw new \ErrorException('cURL is not currently installed');
+			throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $this->curl->errno());
 		} else {
 			$this->_ch = curl_init();
 		}
@@ -46,7 +47,9 @@ class Curl{
 	 * Called when the object is garbage collected. This method basically just closes the cURL handle.
 	 */
 	public function __destruct(){
-		curl_close($this->_ch);
+		if($this->_ch !== null){
+			curl_close($this->_ch);
+		}
 	}
 
 	/**
@@ -215,7 +218,7 @@ class Curl{
 	}
 
 	/**
-	 * Pause an unpause a connection
+	 * Pause and unpause a connection
 	 * @see  http://php.net/manual/en/function.curl-pause.php Official PHP documentation for curl_pause()
 	 * @param  int $bitmask One of the **CURLPAUSE_\*** constants
 	 * @return int Returns an error code (**CURLE_OK** for no error)

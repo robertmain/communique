@@ -13,8 +13,6 @@
 
 namespace Communique;
 
-use \Curl;
-
 /**
  * CurlHTTP Client
  *
@@ -50,10 +48,16 @@ class CurlHTTPClient implements HTTPClient {
 	 * @throws \Communique\CommuniqueRESTSSLException REST SSL exception. This is thrown for things such as SSL certificate errors or SSL handshake errors.
 	 */
 	public function request(\Communique\RESTClientRequest $request) {
+		$headers = array();
+		foreach($request->headers as $header_key => $header_value){
+			$headers[] = $header_key . ': ' . $header_value;
+		}
+		
 		$this->curl->setopt_array(array(
 			CURLOPT_URL => $request->url,
 			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_HEADER => true
+			CURLOPT_HEADER => true,
+			CURLOPT_HTTPHEADER => $headers
 		));
 
 		$this->curl->setopt(CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
@@ -69,7 +73,6 @@ class CurlHTTPClient implements HTTPClient {
 			break;
 
 			case 'PUT':
-				$this->curl->setopt(CURLOPT_PUT, true);
 				$this->curl->setopt_array(
 					array(
 						CURLOPT_PUT => true,
@@ -79,12 +82,27 @@ class CurlHTTPClient implements HTTPClient {
 			break;
 
 			case 'DELETE':
-				$this->curl->setopt(CURLOPT_CUSTOMREQUEST, 'DELETE');
+				$this->curl->setopt_array(
+					array(
+						CURLOPT_CUSTOMREQUEST => 'DELETE',
+						CURLOPT_URL => $request->url
+					)
+				);
 			break;
 
 			default:
 			case 'GET':
-				$this->curl->setopt(CURLOPT_HTTPGET, 'GET');
+				if($payload = http_build_query($request->payload)){
+					$payload = '?' . $payload;
+				} else {
+					$payload = '';
+				}
+				$this->curl->setopt_array(
+					array(
+						CURLOPT_HTTPGET => true,
+						CURLOPT_URL => $request->url . $payload
+					)
+				);
 			break;
 		}
 		
@@ -99,7 +117,7 @@ class CurlHTTPClient implements HTTPClient {
 				case CURLE_SSL_CIPHER:
 				case CURLE_SSL_CACERT:
 				case CURLE_SSL_CONNECT_ERROR:
-					throw new \Communique\CommuniqueRESTSSLConnectionException('cURL SSL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $this->curl->errno());				
+					throw new \Communique\CommuniqueRESTSSLConnectionException('cURL SSL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $this->curl->errno());
 				break;
 
 				case CURLE_UNSUPPORTED_PROTOCOL:
@@ -109,7 +127,7 @@ class CurlHTTPClient implements HTTPClient {
 				break;
 
 				default:
-					throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $this->curl->errno());
+					throw new \Communique\CommuniqueRESTException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $this->curl->errno());
 				break;
 			}
 		} else {
