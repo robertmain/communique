@@ -25,6 +25,38 @@ class CurlExceptionTest extends PHPUnit_Framework_TestCase{
 		$this->setExpectedException('\Communique\CommuniqueRESTConnectionException');
 		$this->http_client->request($request);
 	}
+
+	public function test_couldnt_connect(){
+		$this->curl->expects($this->once())
+					->method('exec')
+					->will($this->returnCallback(function(){
+						return false;
+					}));
+
+		$this->curl->expects($this->once())
+					->method('errno')
+					->will($this->returnValue(CURLE_COULDNT_CONNECT));
+
+		$request = new \Communique\RESTClientRequest('GET', 'https://domain.com/users', array(), array());
+		$this->setExpectedException('\Communique\CommuniqueRESTConnectionException');
+		$this->http_client->request($request);
+	}
+
+	public function test_couldnt_resolve_host(){
+		$this->curl->expects($this->once())
+					->method('exec')
+					->will($this->returnCallback(function(){
+						return false;
+					}));
+
+		$this->curl->expects($this->once())
+					->method('errno')
+					->will($this->returnValue(CURLE_COULDNT_RESOLVE_HOST));
+
+		$request = new \Communique\RESTClientRequest('GET', 'https://domain.com/users', array(), array());
+		$this->setExpectedException('\Communique\CommuniqueRESTConnectionException');
+		$this->http_client->request($request);
+	}
 	
     public function test_general_exception(){
         $this->curl->expects($this->once())
