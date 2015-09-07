@@ -18,8 +18,6 @@ namespace Communique;
  *
  * This class is used to provide an object wrapper around cURL
  * 
- */
-/**
  * @codeCoverageIgnore
  */
 class Curl{
@@ -61,6 +59,11 @@ class Curl{
 		$this->_ch = curl_copy_handle($this->_ch);
 	}
 
+	/**
+	 * Converts a string containing multiple headers into an array that can be used programatically.
+	 * @param  string $headerContent A header string
+	 * @return array An indexable array of headers
+	 */
 	private static function headers_to_array($headerContent){
 	    $headers = array();
 	    $arrRequests = explode("\r\n\r\n", $headerContent);
