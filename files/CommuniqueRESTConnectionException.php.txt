@@ -12,21 +12,20 @@
  */
 
 namespace Communique;
-use \Exception;
 
 /**
  *
  * Exception
  *
- * This exception is a general purpose exception used to handle all nondescript errors with REST calls.
+ * This exception is thrown for connection errors when attempting to reach the API.
  * 
  */
-class RESTException extends \Exception{
+class CommuniqueRESTConnectionException extends \Communique\CommuniqueException {
 	/**
-	 * Constructor for general purpose REST Exception
+	 * Constructor for REST Connection Exception
 	 * @param String $message A human readable description of the exception
 	 */
-	public function __construct($message){
+	public function __construct($message) {
 		parent::__construct($message);
 	}
 }

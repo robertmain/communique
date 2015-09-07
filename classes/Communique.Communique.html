@@ -114,12 +114,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">2</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -144,19 +144,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1564648881"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1925900898"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1564648881" class="accordion-body collapse in">
+            <div id="namespace-1925900898" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1208932612"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-488582426"></a>
                                 <a href="../namespaces/Communique.html" style="margin-left: 30px; padding-left: 0">Communique</a>
             </div>
-            <div id="namespace-1208932612" class="accordion-body collapse ">
+            <div id="namespace-488582426" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -164,12 +164,14 @@
                                                     <li class="interface"><a href="../classes/Communique.HTTPClient.html">HTTPClient</a></li>
                                                     <li class="interface"><a href="../classes/Communique.Interceptor.html">Interceptor</a></li>
                                                                                                     <li class="class"><a href="../classes/Communique.Communique.html">Communique</a></li>
+                                                    <li class="class"><a href="../classes/Communique.CommuniqueException.html">CommuniqueException</a></li>
+                                                    <li class="class"><a href="../classes/Communique.CommuniqueRESTConnectionException.html">CommuniqueRESTConnectionException</a></li>
+                                                    <li class="class"><a href="../classes/Communique.CommuniqueRESTException.html">CommuniqueRESTException</a></li>
+                                                    <li class="class"><a href="../classes/Communique.CommuniqueRESTSSLException.html">CommuniqueRESTSSLException</a></li>
+                                                    <li class="class"><a href="../classes/Communique.Curl.html">Curl</a></li>
                                                     <li class="class"><a href="../classes/Communique.CurlHTTPClient.html">CurlHTTPClient</a></li>
                                                     <li class="class"><a href="../classes/Communique.RESTClientRequest.html">RESTClientRequest</a></li>
                                                     <li class="class"><a href="../classes/Communique.RESTClientResponse.html">RESTClientResponse</a></li>
-                                                    <li class="class"><a href="../classes/Communique.RESTConnectionException.html">RESTConnectionException</a></li>
-                                                    <li class="class"><a href="../classes/Communique.RESTException.html">RESTException</a></li>
-                                                    <li class="class"><a href="../classes/Communique.RESTSSLException.html">RESTSSLException</a></li>
                                             </ul>
                 </div>
             </div>
@@ -340,12 +342,12 @@
             <a id="property__interceptors" name="property__interceptors" class="anchor"></a>
             <article class="property">
                 <h3 class="private ">$_interceptors</h3>
-                <pre class="signature">$_interceptors : String</pre>
+                <pre class="signature">$_interceptors : Array</pre>
                 <p><em>An array of interceptors used for processing the requests</em></p>
                 
 
                                 <h4>Type</h4>
-                String
+                Array
                                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -419,6 +421,11 @@
                             </tr>
                                             </table>
                 
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\Communique\CommuniqueException</dt>
+                            <dd></dd>
+                                                                    </dl>
                 
                 				
                             </article>
@@ -440,7 +447,7 @@
             <article class="method">
                 <h3 class="public ">get()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">get(String  <span class="argument">$url</span>, mixed  <span class="argument">$payload</span>, array  <span class="argument">$headers = array()</span>, callable  <span class="argument">$debug = null</span>) : \Communique\RESTClientResponse</pre>
+                <pre class="signature" style="margin-right: 54px;">get(String  <span class="argument">$url</span>, mixed  <span class="argument">$payload = array()</span>, array  <span class="argument">$headers = array()</span>, callable  <span class="argument">$debug = null</span>) : \Communique\RESTClientResponse</pre>
                 <p><em>Make an HTTP GET request</em></p>
                 
 
@@ -599,7 +606,7 @@ This function should accept two parameters, one for the request object one for t
             <article class="method">
                 <h3 class="public ">delete()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">delete(String  <span class="argument">$url</span>, mixed  <span class="argument">$payload</span>, array  <span class="argument">$headers = array()</span>, callable  <span class="argument">$debug = null</span>) : \Communique\RESTClientResponse</pre>
+                <pre class="signature" style="margin-right: 54px;">delete(String  <span class="argument">$url</span>, mixed  <span class="argument">$payload = array()</span>, array  <span class="argument">$headers = array()</span>, callable  <span class="argument">$debug = null</span>) : \Communique\RESTClientResponse</pre>
                 <p><em>Make an HTTP DELETE request</em></p>
                 
 
@@ -652,7 +659,7 @@ This function should accept two parameters, one for the request object one for t
             <article class="method">
                 <h3 class="protected ">_call()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_call(\Communique\RESTClientRequest  <span class="argument">$request</span>) : \Communique\RESTClientResponse</pre>
+                <pre class="signature" style="margin-right: 54px;">_call(\Communique\RESTClientRequest  <span class="argument">$request</span>, callable  <span class="argument">$debug = null</span>) : \Communique\RESTClientResponse</pre>
                 <p><em>Makes the HTTP request using the chosen HTTP client.</em></p>
                 
 
@@ -662,6 +669,11 @@ This function should accept two parameters, one for the request object one for t
                                 <td><a href="../classes/Communique.RESTClientRequest.html">\Communique\RESTClientRequest</a></td>
                                 <td>$request </td>
                                 <td><p>A RESTClientRequest object encapsulating the request</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>callable</td>
+                                <td>$debug </td>
+                                <td><p>A debugging callback to be run after the request has finished. This function is expected to accept two parameters, \Communique\RESTClientRequest and \Communique\RESTClientResponse</p></td>
                             </tr>
                                             </table>
                 
@@ -678,14 +690,7 @@ This function should accept two parameters, one for the request object one for t
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                                                            <p>bubble the request and response through the interceptors</p>
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
@@ -740,7 +745,7 @@ This function should accept two parameters, one for the request object one for t
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 24th, 2015 at 22:49.
+                    on September 8th, 2015 at 00:43.
                 </section>
             </section>
         </section>

@@ -19,7 +19,7 @@ namespace Communique;
  * This interface is used to describe the functionality of an interceptor
  * 
  */
-interface Interceptor{
+interface Interceptor {
 
 
 	/**

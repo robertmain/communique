@@ -20,7 +20,7 @@ namespace Communique;
  * This interface is used to describe the functionality of an http client
  * 
  */
-interface HTTPClient{
+interface HTTPClient {
 
 
 	/**

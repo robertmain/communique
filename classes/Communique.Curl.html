@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>Communique REST Client</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">Communique REST Client</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/Communique.html">\Communique</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1242862335"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1242862335" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1149517157"></a>
+                                <a href="../namespaces/Communique.html" style="margin-left: 30px; padding-left: 0">Communique</a>
+            </div>
+            <div id="namespace-1149517157" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/Communique.HTTPClient.html">HTTPClient</a></li>
+                                                    <li class="interface"><a href="../classes/Communique.Interceptor.html">Interceptor</a></li>
+                                                                                                    <li class="class"><a href="../classes/Communique.Communique.html">Communique</a></li>
+                                                    <li class="class"><a href="../classes/Communique.CommuniqueException.html">CommuniqueException</a></li>
+                                                    <li class="class"><a href="../classes/Communique.CommuniqueRESTConnectionException.html">CommuniqueRESTConnectionException</a></li>
+                                                    <li class="class"><a href="../classes/Communique.CommuniqueRESTException.html">CommuniqueRESTException</a></li>
+                                                    <li class="class"><a href="../classes/Communique.CommuniqueRESTSSLException.html">CommuniqueRESTSSLException</a></li>
+                                                    <li class="class"><a href="../classes/Communique.Curl.html">Curl</a></li>
+                                                    <li class="class"><a href="../classes/Communique.CurlHTTPClient.html">CurlHTTPClient</a></li>
+                                                    <li class="class"><a href="../classes/Communique.RESTClientRequest.html">RESTClientRequest</a></li>
+                                                    <li class="class"><a href="../classes/Communique.RESTClientResponse.html">RESTClientResponse</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/Communique.html">\Communique</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\Communique</small>Curl</h1>
+                    <p><em>cURL Class</em></p>
+                    <p>This class is used to provide an object wrapper around cURL</p>
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Communique.Curl.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method___destruct" class="">__destruct()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method___clone" class="">__clone()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_version" class="">version()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_strerror" class="">strerror()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_file_create" class="">file_create()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_errno" class="">errno()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_error" class="">error()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_escape" class="">escape()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_exec" class="">exec()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_getinfo" class="">getinfo()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_pause" class="">pause()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_setopt_array" class="">setopt_array()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_setopt" class="">setopt()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_unescape" class="">unescape()</a><br />
+                                                                    <a href="../classes/Communique.Curl.html#method_reset" class="">reset()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/Communique.Curl.html#method_headers_to_array" class="">headers_to_array()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Communique.Curl.html#property__ch" class="">$_ch</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Curl.html"><div class="path-wrapper">Curl.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Communique</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\Communique\Curl</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                codeCoverageIgnore
+                            </th>
+                            <td>
+                                                                    
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property__ch" name="property__ch" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$_ch</h3>
+                <pre class="signature">$_ch : Object</pre>
+                <p><em>A cURL handle created when the object is constructed</em></p>
+                
+
+                                <h4>Type</h4>
+                Object
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(string  <span class="argument">$url = null</span>) </pre>
+                <p><em>Constructs the cURL object wrapper</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$url </td>
+                                <td><p>If provided, the <strong>CURLOPT_URL</strong> option will be set to its value. You can manually set this using the <code>setopt()</code> method.</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\Communique\CommuniqueRESTConnectionException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___destruct" name="method___destruct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__destruct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__destruct() </pre>
+                <p><em>Called when the object is garbage collected. This method basically just closes the cURL handle.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___clone" name="method___clone" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__clone()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__clone() </pre>
+                <p><em>Called when the object is copied using the `clone` operator.</em></p>
+                <p>Copies the current cURL handle and sets the value returned from <code>curl_copy_handle()</code> as the value of <code>$this-&gt;_ch</code></p>
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_version" name="method_version" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">version()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">version(integer  <span class="argument">$age = CURLVERSION_NOW</span>) : array</pre>
+                <p><em>Gets cURL version information</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$age </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Returns an asociative array with information regarding the version of cURL in question</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-version.php"><span class="namespace-wrapper">Official PHP documentation for curl_version()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_strerror" name="method_strerror" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">strerror()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">strerror(integer  <span class="argument">$errornum</span>) : string</pre>
+                <p><em>Return string describing the given error code</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$errornum </td>
+                                <td><p>One of the <a href="http://curl.haxx.se/libcurl/c/libcurl-errors.html">cURL error codes</a> constants</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Returns error description or NULL for invalid error code.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-strerror.php"><span class="namespace-wrapper">Official PHP documentation for curl_strerror()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_file_create" name="method_file_create" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">file_create()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">file_create(string  <span class="argument">$filename</span>, string  <span class="argument">$mimetype = &#039;&#039;</span>, string  <span class="argument">$postname = &#039;&#039;</span>) : \CURLFile</pre>
+                <p><em>Create a CURLFile object</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$filename </td>
+                                <td><p>Path to the file which will be uploaded</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$mimetype </td>
+                                <td><p>Mimetype of the file</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$postname </td>
+                                <td><p>Name of the file to be used in the upload data</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \CURLFile
+                                            &mdash; <p>Returns a CURLFile object</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-file-create.php"><span class="namespace-wrapper">Official PHP documentation for curl_file_create()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_errno" name="method_errno" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">errno()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">errno() : integer</pre>
+                <p><em>Return the last error number</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>Returns the error number or 0 (zero) if no error ocurred.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-errno.php"><span class="namespace-wrapper">Official PHP documentation for curl_errno()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_error" name="method_error" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">error()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">error() : string</pre>
+                <p><em>Return a a string containing the last error for the current session</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Returns the error message or &quot;&quot; (the empty string) if no error ocurred</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-error.php"><span class="namespace-wrapper">Official PHP documentation for curl_error()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_escape" name="method_escape" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">escape()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">escape(string  <span class="argument">$str</span>) : string|boolean</pre>
+                <p><em>URL encodes the given string</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$str </td>
+                                <td><p>The string to be encoded</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string|boolean
+                                            &mdash; <p>Returns escaped string or <strong>FALSE</strong> on failiure</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-escape.php"><span class="namespace-wrapper">Official PHP documentation for curl_escape()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_exec" name="method_exec" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">exec()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">exec() : boolean|mixed</pre>
+                <p><em>This function should be called after initializing a cURL session and all the options for the session are set</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean|mixed
+                                            &mdash; <p>Returns <strong>TRUE</strong> on success or <strong>FALSE</strong> on failiure. However, if the <strong>CURLOPT_RETURNTANSFER</strong> option is set, it will return the result on success, <strong>FALSE</strong> on failiure</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-exec.php"><span class="namespace-wrapper">Official PHP documentation for curl_exec()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getinfo" name="method_getinfo" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getinfo()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getinfo(integer  <span class="argument">$opt</span>) : mixed|array|boolean</pre>
+                <p><em>Get information regarding a specific transfer</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$opt </td>
+                                <td><p>This may be one of the following constants:</p>
+<ol>
+<li><strong>CURLINFO_EFFECTIVE_URL</strong> - Last effective URL</li>
+<li><strong>CURLINFO_HTTP_CODE</strong> - Last received HTTP code</li>
+<li><strong>CURLINFO_FILETIME</strong> - Remote time of the retrieved document, if -1 is returned the time of the document is unknown</li>
+<li><strong>CURLINFO_TOTAL_TIME</strong> - Total transaction time in seconds for last transfer</li>
+<li><strong>CURLINFO_NAMELOOKUP_TIME</strong> - Time in seconds until name resolving was complete</li>
+<li><strong>CURLINFO_CONNECT_TIME</strong> - Time in seconds it took to establish the connection</li>
+<li><strong>CURLINFO_PRETRANSFER_TIME</strong> - Time in seconds from start until just before file transfer begins</li>
+<li><strong>CURLINFO_STARTTRANSFER_TIME</strong> - Time in seconds until the first byte is about to be transferred</li>
+<li><strong>CURLINFO_REDIRECT_COUNT</strong> - Number of redirects, with the CURLOPT_FOLLOWLOCATION option enabled</li>
+<li><strong>CURLINFO_REDIRECT_TIME</strong> - Time in seconds of all redirection steps before final transaction was started, with the CURLOPT_FOLLOWLOCATION option enabled</li>
+<li><strong>CURLINFO_REDIRECT_URL</strong> - With the CURLOPT_FOLLOWLOCATION option disabled: redirect URL found in the last transaction, that should be requested manually next. With the CURLOPT_FOLLOWLOCATION option enabled: this is empty. The redirect URL in this case is available in CURLINFO_EFFECTIVE_URL</li>
+<li><strong>CURLINFO_PRIMARY_IP</strong> - IP address of the most recent connection</li>
+<li><strong>CURLINFO_PRIMARY_PORT</strong> - Destination port of the most recent connection</li>
+<li><strong>CURLINFO_LOCAL_IP</strong> - Local (source) IP address of the most recent connection</li>
+<li><strong>CURLINFO_LOCAL_PORT</strong> - Local (source) port of the most recent connection</li>
+<li><strong>CURLINFO_SIZE_UPLOAD</strong> - Total number of bytes uploaded</li>
+<li><strong>CURLINFO_SIZE_DOWNLOAD</strong> - Total number of bytes downloaded</li>
+<li><strong>CURLINFO_SPEED_DOWNLOAD</strong> - Average download speed</li>
+<li><strong>CURLINFO_SPEED_UPLOAD</strong> - Average upload speed</li>
+<li><strong>CURLINFO_HEADER_SIZE</strong> - Total size of all headers received</li>
+<li><strong>CURLINFO_HEADER_OUT</strong> - The request string sent. For this to work, add the CURLINFO_HEADER_OUT option to the handle by calling setopt()</li>
+<li><strong>CURLINFO_REQUEST_SIZE</strong> - Total size of issued requests, currently only for HTTP requests</li>
+<li><strong>CURLINFO_SSL_VERIFYRESULT</strong> - Result of SSL certification verification requested by setting CURLOPT_SSL_VERIFYPEER</li>
+<li><strong>CURLINFO_CONTENT_LENGTH_DOWNLOAD</strong> - content-length of download, read from Content-Length: field</li>
+<li><strong>CURLINFO_CONTENT_LENGTH_UPLOAD</strong> - Specified size of upload</li>
+<li><strong>CURLINFO_CONTENT_TYPE</strong> - Content-Type: of the requested document, NULL indicates server did not send valid Content-Type: header</li>
+<li><strong>CURLINFO_PRIVATE</strong> - Private data associated with this cURL handle, previously set with the CURLOPT_PRIVATE option of setopt()</li>
+</ol></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed|array|boolean
+                                            &mdash; <p>If <strong>opt</strong> is given, returns it's value. Otherwise, returns an associative array with the following elements(which correspond to <strong>opt</strong>), or <strong>FALSE</strong> on failiure:</p>
+<ul>
+<li>&quot;url&quot;</li>
+<li>&quot;content_type&quot;</li>
+<li>&quot;http_code&quot;</li>
+<li>&quot;header_size&quot;</li>
+<li>&quot;request_size&quot;</li>
+<li>&quot;filetime&quot;</li>
+<li>&quot;ssl_verify_result&quot;</li>
+<li>&quot;redirect_count&quot;</li>
+<li>&quot;total_time&quot;</li>
+<li>&quot;namelookup_time&quot;</li>
+<li>&quot;connect_time&quot;</li>
+<li>&quot;pretransfer_time&quot;</li>
+<li>&quot;size_upload&quot;</li>
+<li>&quot;size_download&quot;</li>
+<li>&quot;speed_download&quot;</li>
+<li>&quot;speed_upload&quot;</li>
+<li>&quot;download_content_length&quot;</li>
+<li>&quot;upload_content_length&quot;</li>
+<li>&quot;starttransfer_time&quot;</li>
+<li>&quot;redirect_time&quot;</li>
+<li>&quot;certinfo&quot;</li>
+<li>&quot;primary_ip&quot;</li>
+<li>&quot;primary_port&quot;</li>
+<li>&quot;local_ip&quot;</li>
+<li>&quot;local_port&quot;</li>
+<li>&quot;redirect_url&quot;</li>
+<li>&quot;request_header&quot; (This is only set if the <strong>CURLINFO_HEADER_OUT</strong> is set by a previous call to setopt())</li>
+</ul>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-getinfo.php"><span class="namespace-wrapper">Official PHP documentation for curl_getinfo()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_pause" name="method_pause" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">pause()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">pause(integer  <span class="argument">$bitmask</span>) : integer</pre>
+                <p><em>Pause and unpause a connection</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$bitmask </td>
+                                <td><p>One of the <strong>CURLPAUSE_*</strong> constants</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>Returns an error code (<strong>CURLE_OK</strong> for no error)</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-pause.php"><span class="namespace-wrapper">Official PHP documentation for curl_pause()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setopt_array" name="method_setopt_array" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setopt_array()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setopt_array(array  <span class="argument">$options</span>) : boolean</pre>
+                <p><em>Set multiple options for a cURL transfer</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>An array specifying which options to set and their values. The keys should be valid curl_setopt() constants or their integer equivalents.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Returns <strong>TRUE</strong> if all options were successfully set. If an option could not be successfully set, <strong>FALSE</strong> is immediately returned, ignoring any future options in the <code>$options</code> array.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-setopt-array.php"><span class="namespace-wrapper">Official PHP documentation for curl_setopt_array()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setopt" name="method_setopt" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setopt()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setopt(integer  <span class="argument">$option</span>, mixed  <span class="argument">$value</span>) : boolean</pre>
+                <p><em>Set an option for a cURL transfer</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$option </td>
+                                <td><p>The <strong>CURLOPT_XXX</strong></p></td>
+                            </tr>
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$value </td>
+                                <td><p>The value to be set on option</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Returns <strong>TRUE</strong> on success or <strong>FALSE</strong> on failure.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-setopt.php"><span class="namespace-wrapper">Official PHP documentation for curl_setopt()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_unescape" name="method_unescape" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">unescape()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">unescape(string  <span class="argument">$str</span>) : string</pre>
+                <p><em>Decodes the given URL encoded string</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$str </td>
+                                <td><p>The URL encoded string to be decoded</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Returned decoded string or <strong>FALSE</strong> on failiure</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://php.net/manual/en/function.curl-unescape.php"><span class="namespace-wrapper">Official PHP documentation for curl_unescape()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_reset" name="method_reset" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">reset()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">reset() </pre>
+                <p><em>Reset all options of a libcurl session handle</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_headers_to_array" name="method_headers_to_array" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">headers_to_array()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">headers_to_array(string  <span class="argument">$headerContent</span>) : array</pre>
+                <p><em>Converts a string containing multiple headers into an array that can be used programatically.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$headerContent </td>
+                                <td><p>A header string</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>An indexable array of headers</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">Curl.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Curl.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/Communique.html">\Communique</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on September 8th, 2015 at 00:43.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
