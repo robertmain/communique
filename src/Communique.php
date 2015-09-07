@@ -55,7 +55,9 @@ class Communique {
 		if ($http_client) {
 			$this->_http = $http_client;
 		} else {
+			//@codeCoverageIgnoreStart
 			$this->_http = new \Communique\CurlHTTPClient();
+			//@codeCoverageIgnoreEnd
 		}
 		foreach ($this->_interceptors as $interceptor) {
 			if (!$interceptor instanceof \Communique\Interceptor) {
