@@ -114,7 +114,8 @@ class CurlHTTPClient implements HTTPClient {
 		$raw_response = $this->curl->exec();
 
 		if(!$raw_response){
-			switch($this->curl->errno()){
+			$curl_error = $this->curl->errno();
+			switch($curl_error){
 				case CURLE_SSL_PEER_CERTIFICATE:
 				case CURLE_SSL_ENGINE_NOTFOUND:
 				case CURLE_SSL_ENGINE_SETFAILED:
@@ -122,17 +123,17 @@ class CurlHTTPClient implements HTTPClient {
 				case CURLE_SSL_CIPHER:
 				case CURLE_SSL_CACERT:
 				case CURLE_SSL_CONNECT_ERROR:
-					throw new \Communique\CommuniqueRESTSSLConnectionException('cURL SSL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $this->curl->errno());
+					throw new \Communique\CommuniqueRESTSSLConnectionException('cURL SSL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $curl_error);
 				break;
 
 				case CURLE_UNSUPPORTED_PROTOCOL:
 				case CURLE_COULDNT_CONNECT:
 				case CURLE_COULDNT_RESOLVE_HOST:
-					throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $this->curl->errno());
+					throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $curl_error);
 				break;
 
 				default:
-					throw new \Communique\CommuniqueRESTException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $this->curl->errno());
+					throw new \Communique\CommuniqueRESTException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $curl_error);
 				break;
 			}
 		} else {
