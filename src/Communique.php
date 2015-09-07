@@ -47,6 +47,7 @@ class Communique {
 	 * @param String $base_url The base URL of the API you wish to make requests to. All other paths referenced will be treated as relative to this.
 	 * @param array $interceptors An array of any interceptors you wish to use to modify the request. An interceptor could do anything from JSON parsing to OAuth request signing.
 	 * @param \Communique\HTTPClient $http_client The HTTP client you wish to make the request with
+	 * @throws  \Communique\CommuniqueException
 	 */
 	public function __construct($base_url = '', array $interceptors = array(), $http_client = null) {
 		$this->_BASE_URL = $base_url;
@@ -54,7 +55,9 @@ class Communique {
 		if ($http_client) {
 			$this->_http = $http_client;
 		} else {
+			//@codeCoverageIgnoreStart
 			$this->_http = new \Communique\CurlHTTPClient();
+			//@codeCoverageIgnoreEnd
 		}
 		foreach ($this->_interceptors as $interceptor) {
 			if (!$interceptor instanceof \Communique\Interceptor) {
@@ -67,7 +70,6 @@ class Communique {
 	 * Makes the HTTP request using the chosen HTTP client.
 	 * @param  \Communique\RESTClientRequest $request A RESTClientRequest object encapsulating the request
 	 * @param  callable $debug A debugging callback to be run after the request has finished. This function is expected to accept two parameters, \Communique\RESTClientRequest and \Communique\RESTClientResponse
-	 * @throws \Communique\CommuniqueException
 	 * @return \Communique\RESTClientResponse A RESTClientResponse object encapsulating the response
 	 */
 	protected function _call(\Communique\RESTClientRequest $request, $debug = null) {
