@@ -30,8 +30,8 @@ class CurlHTTPClient implements HTTPClient {
 	 * Constructs the Curl HTTP adapter
 	 * @param \Communique\Curl $curl A cURL object wrapper
 	 */
-	public function __construct(\Communique\Curl $curl = null){
-		if($curl){
+	public function __construct(\Communique\Curl $curl = null) {
+		if ($curl) {
 			$this->curl = $curl;
 		} else {
 			//@codeCoverageIgnoreStart
@@ -49,7 +49,7 @@ class CurlHTTPClient implements HTTPClient {
 	 */
 	public function request(\Communique\RESTClientRequest $request) {
 		$headers = array();
-		foreach($request->headers as $header_key => $header_value){
+		foreach ($request->headers as $header_key => $header_value) {
 			$headers[] = $header_key . ': ' . $header_value;
 		}
 
@@ -62,7 +62,7 @@ class CurlHTTPClient implements HTTPClient {
 
 		$this->curl->setopt(CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
 
-		switch($request->method){
+		switch ($request->method) {
 			case 'POST':
 				$this->curl->setopt_array(
 					array(
@@ -82,7 +82,7 @@ class CurlHTTPClient implements HTTPClient {
 			break;
 
 			case 'DELETE':
-				if($payload = http_build_query($request->payload)){
+				if ($payload = http_build_query($request->payload)) {
 					$payload = '?' . $payload;
 				} else {
 					$payload = '';
@@ -97,7 +97,7 @@ class CurlHTTPClient implements HTTPClient {
 
 			default:
 			case 'GET':
-				if($payload = http_build_query($request->payload)){
+				if ($payload = http_build_query($request->payload)) {
 					$payload = '?' . $payload;
 				} else {
 					$payload = '';
@@ -113,9 +113,9 @@ class CurlHTTPClient implements HTTPClient {
 		
 		$raw_response = $this->curl->exec();
 
-		if(!$raw_response){
+		if (!$raw_response) {
 			$curl_error = $this->curl->errno();
-			switch($curl_error){
+			switch ($curl_error) {
 				case CURLE_SSL_PEER_CERTIFICATE:
 				case CURLE_SSL_ENGINE_NOTFOUND:
 				case CURLE_SSL_ENGINE_SETFAILED:

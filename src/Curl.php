@@ -20,7 +20,7 @@ namespace Communique;
  * 
  * @codeCoverageIgnore
  */
-class Curl{
+class Curl {
 
 	/**
 	 * A cURL handle created when the object is constructed
@@ -33,8 +33,8 @@ class Curl{
 	 * @param  string $url If provided, the **CURLOPT_URL** option will be set to its value. You can manually set this using the `setopt()` method.
 	 * @throws \Communique\CommuniqueRESTConnectionException
 	 */
-	public function __construct($url = null){
-		if(!extension_loaded('curl')){
+	public function __construct($url = null) {
+		if (!extension_loaded('curl')) {
 			throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->error() . ' cURL Error Code: ' . $this->errno());
 		} else {
 			$this->_ch = curl_init($url);
@@ -44,8 +44,8 @@ class Curl{
 	/**
 	 * Called when the object is garbage collected. This method basically just closes the cURL handle.
 	 */
-	public function __destruct(){
-		if($this->_ch !== null){
+	public function __destruct() {
+		if ($this->_ch !== null) {
 			curl_close($this->_ch);
 		}
 	}
@@ -55,7 +55,7 @@ class Curl{
 	 * 
 	 * Copies the current cURL handle and sets the value returned from `curl_copy_handle()` as the value of `$this->_ch` 
 	 */
-	public function __clone(){
+	public function __clone() {
 		$this->_ch = curl_copy_handle($this->_ch);
 	}
 
@@ -65,17 +65,17 @@ class Curl{
 	 * @return array An indexable array of headers
 	 */
 	private static function headers_to_array($headerContent){
-	    $headers = array();
-	    $arrRequests = explode("\r\n\r\n", $headerContent);
-        foreach(explode("\r\n", $arrRequests[0]) as $i => $line){
-            if($i === 0){
-                $headers['http_code'] = $line;
-            } else {
-                list($key, $value) = explode(': ', $line);
-                $headers[$key] = $value;
-            }
-        }
-	    return $headers;
+		$headers = array();
+		$arrRequests = explode("\r\n\r\n", $headerContent);
+		foreach(explode("\r\n", $arrRequests[0]) as $i => $line){
+			if($i === 0){
+				$headers['http_code'] = $line;
+			} else {
+				list($key, $value) = explode(': ', $line);
+				$headers[$key] = $value;
+			}
+		}
+		return $headers;
 	}
 
 	/**
@@ -84,7 +84,7 @@ class Curl{
 	 * @param  int $age 
 	 * @return array Returns an asociative array with information regarding the version of cURL in question
 	 */
-	public static function version($age = CURLVERSION_NOW){
+	public static function version($age = CURLVERSION_NOW) {
 		return curl_version($age);
 	}
 
@@ -94,7 +94,7 @@ class Curl{
 	 * @param  int $errornum One of the [cURL error codes](http://curl.haxx.se/libcurl/c/libcurl-errors.html) constants
 	 * @return string Returns error description or NULL for invalid error code.
 	 */
-	public static function strerror($errornum){
+	public static function strerror($errornum) {
 		return curl_strerror($errornum);
 	}
 
@@ -106,7 +106,7 @@ class Curl{
 	 * @param  string $postname Name of the file to be used in the upload data
 	 * @return \CURLFile           Returns a CURLFile object
 	 */
-	public static function file_create($filename, $mimetype = '', $postname = ''){
+	public static function file_create($filename, $mimetype = '', $postname = '') {
 		return curl_file_create($filename, $mimetype, $postname);
 	}
 
@@ -115,7 +115,7 @@ class Curl{
 	 * @see  http://php.net/manual/en/function.curl-errno.php Official PHP documentation for curl_errno()
 	 * @return int Returns the error number or 0 (zero) if no error ocurred.
 	 */
-	public function errno(){
+	public function errno() {
 		return curl_errno($this->_ch);
 	}
 
@@ -124,7 +124,7 @@ class Curl{
 	 * @see  http://php.net/manual/en/function.curl-error.php Official PHP documentation for curl_error()
 	 * @return string Returns the error message or "" (the empty string) if no error ocurred
 	 */
-	public function error(){
+	public function error() {
 		return curl_error($this->_ch);
 	}
 
@@ -134,7 +134,7 @@ class Curl{
 	 * @param  string $str The string to be encoded
 	 * @return string|boolean Returns escaped string or **FALSE** on failiure
 	 */
-	public function escape($str){
+	public function escape($str) {
 		return curl_escape($this->_ch, $str);
 	}
 
@@ -143,8 +143,8 @@ class Curl{
 	 * @see http://php.net/manual/en/function.curl-exec.php Official PHP documentation for curl_exec()
 	 * @return boolean|mixed     Returns **TRUE** on success or **FALSE** on failiure. However, if the **CURLOPT_RETURNTANSFER** option is set, it will return the result on success, **FALSE** on failiure	 
 	 */
-	public function exec(){
-		if($response = curl_exec($this->_ch)){
+	public function exec() {
+		if ($response = curl_exec($this->_ch)) {
 			$header_size = $this->getinfo(CURLINFO_HEADER_SIZE);
 			return array(
 				'http_status_code' => $this->getinfo(CURLINFO_HTTP_CODE),
@@ -216,7 +216,7 @@ class Curl{
 	 * - "redirect_url"
 	 * - "request_header" (This is only set if the **CURLINFO_HEADER_OUT** is set by a previous call to setopt())
 	 */
-	public function getinfo($opt = 0){
+	public function getinfo($opt = 0) {
 		return curl_getinfo($this->_ch, $opt);
 	}
 
@@ -226,7 +226,7 @@ class Curl{
 	 * @param  int $bitmask One of the **CURLPAUSE_\*** constants
 	 * @return int Returns an error code (**CURLE_OK** for no error)
 	 */
-	public function pause($bitmask){
+	public function pause($bitmask) {
 		return curl_pause($this->_ch, $bitmask);
 	}
 
@@ -237,7 +237,7 @@ class Curl{
 	 * @param  array $options An array specifying which options to set and their values. The keys should be valid curl_setopt() constants or their integer equivalents.
 	 * @return boolean Returns **TRUE** if all options were successfully set. If an option could not be successfully set, **FALSE** is immediately returned, ignoring any future options in the `$options` array.
 	 */
-	public function setopt_array($options){
+	public function setopt_array($options) {
 		return curl_setopt_array($this->_ch, $options);
 	}
 
@@ -248,7 +248,7 @@ class Curl{
 	 * @param  mixed $value The value to be set on option
 	 * @return boolean Returns **TRUE** on success or **FALSE** on failure.
 	 */
-	public function setopt($option, $value){
+	public function setopt($option, $value) {
 		return curl_setopt($this->_ch, $option, $value);
 	}
 
@@ -258,14 +258,14 @@ class Curl{
 	 * @param  string $str The URL encoded string to be decoded
 	 * @return string Returned decoded string or **FALSE** on failiure
 	 */
-	public function unescape($str){
+	public function unescape($str) {
 		return curl_unescape($this->_ch, $str);
 	}
 
 	/**
 	 * Reset all options of a libcurl session handle
 	 */
-	public function reset(){
+	public function reset() {
 		curl_reset($this->_ch);
 	}
 }
