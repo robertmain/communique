@@ -20,9 +20,13 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'GET');
                         PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
+                        return new \Communique\RESTClientResponse(200, 'response+payload', array());
                     }));
 
-    	$this->rest->get('users', 'request+payload');
+        $response =  $this->rest->get('users', 'request+payload');
+        PHPUnit_Framework_TestCase::assertEquals($response->status, 200);
+        PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
+        PHPUnit_Framework_TestCase::assertEquals($response->headers, array());
     }
 
     public function test_put(){
@@ -111,7 +115,6 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         $this->setExpectedException('\Communique\CommuniqueException');
         $rest = new \Communique\Communique('http://domain.com/', array('bad value'), $this->http);
     }
-
 
     public function test_debug_function_is_called(){
         $rest = new \Communique\Communique('http://domain.com/', array(), $this->http);
