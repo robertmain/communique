@@ -24,7 +24,7 @@ class Curl{
 
 	/**
 	 * A cURL handle created when the object is constructed
-	 * @var Object
+	 * @var resource
 	 */
 	private $_ch = null;
 
