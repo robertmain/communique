@@ -35,7 +35,7 @@ class Curl{
 	 */
 	public function __construct($url = null){
 		if(!extension_loaded('curl')){
-			throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $this->curl->errno());
+			throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->error() . ' cURL Error Code: ' . $this->errno());
 		} else {
 			$this->_ch = curl_init();
 		}
