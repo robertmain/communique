@@ -6,10 +6,6 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
     	$this->http = $this->getMockBuilder('\Communique\HTTPClient')
                             ->setMethods(array('request'))
                             ->getMock();
-        $this->http->method('request')
-                    ->will($this->returnCallback(function(){
-                        return new \Communique\RESTClientResponse(200, 'response+payload', array());
-                    }));
     	$this->rest = new \Communique\Communique('http://domain.com/', array(), $this->http);
     }
 
@@ -20,9 +16,13 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'GET');
                         PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
+                        return new \Communique\RESTClientResponse(200, 'response+payload', array('X-PoweredBy' => 'Dreams'));
                     }));
-
-    	$this->rest->get('users', 'request+payload');
+        $response =  $this->rest->get('users', 'request+payload');
+        PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientResponse', $response);
+        PHPUnit_Framework_TestCase::assertEquals($response->status, 200);
+        PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
+        PHPUnit_Framework_TestCase::assertEquals($response->headers, array('X-PoweredBy' => 'Dreams'));
     }
 
     public function test_put(){
@@ -32,9 +32,13 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'PUT');
                         PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
+                        return new \Communique\RESTClientResponse(200, 'response+payload', array('X-PoweredBy' => 'Dreams'));
                     }));
-
-        $this->rest->put('users', 'request+payload');
+        $response = $this->rest->put('users', 'request+payload');
+        PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientResponse', $response);
+        PHPUnit_Framework_TestCase::assertEquals($response->status, 200);
+        PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
+        PHPUnit_Framework_TestCase::assertEquals($response->headers, array('X-PoweredBy' => 'Dreams'));
     }
 
     public function test_post(){
@@ -44,9 +48,13 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'POST');
                         PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
+                        return new \Communique\RESTClientResponse(200, 'response+payload', array('X-PoweredBy' => 'Dreams'));
                     }));
-
-        $this->rest->post('users', 'request+payload');
+        $response = $this->rest->post('users', 'request+payload');
+        PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientResponse', $response);
+        PHPUnit_Framework_TestCase::assertEquals($response->status, 200);
+        PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
+        PHPUnit_Framework_TestCase::assertEquals($response->headers, array('X-PoweredBy' => 'Dreams'));
     }
 
     public function test_delete(){
@@ -56,12 +64,21 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'DELETE');
                         PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
+                        return new \Communique\RESTClientResponse(200, 'response+payload', array('X-PoweredBy' => 'Dreams'));
                     }));
-
-        $this->rest->delete('users', 'request+payload');
+        $response = $this->rest->delete('users', 'request+payload');
+        PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientResponse', $response);
+        PHPUnit_Framework_TestCase::assertEquals($response->status, 200);
+        PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
+        PHPUnit_Framework_TestCase::assertEquals($response->headers, array('X-PoweredBy' => 'Dreams'));
     }
 
     public function test_request_interceptor(){
+        $this->http->method('request')
+                    ->will($this->returnCallback(function(){
+                        return new \Communique\RESTClientResponse(200, 'response+payload', array());
+                    }));
+
         //Create the mock interceptor
         $mockInterceptor = $this->getMockBuilder('\Communique\Interceptor')
                                 ->setMethods(array('request', 'response'))
@@ -85,7 +102,11 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         $rest->get('users', 'request+payload');
     }
 
-    public function test_response_interceptor(){
+    public function test_response_interceptor(){        
+        $this->http->method('request')
+                    ->will($this->returnCallback(function(){
+                        return new \Communique\RESTClientResponse(200, 'response+payload', array());
+                    }));
         //Create the mock interceptor
         $mockInterceptor = $this->getMockBuilder('\Communique\Interceptor')
                                 ->setMethods(array('request', 'response'))
@@ -112,12 +133,22 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         $rest = new \Communique\Communique('http://domain.com/', array('bad value'), $this->http);
     }
 
-
     public function test_debug_function_is_called(){
+        $this->http->method('request')
+                    ->will($this->returnCallback(function(){
+                        return new \Communique\RESTClientResponse(200, 'response+payload', array('X-PoweredBy' => 'Dreams'));
+                    }));
         $rest = new \Communique\Communique('http://domain.com/', array(), $this->http);
-        $rest->get('users', array(), array(), function($request, $response){
+        $rest->get('users', array('request' => 'payload'), array('Foo' => 'Bar'), function($request, $response){
             PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
+            PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/users');
+            PHPUnit_Framework_TestCase::assertEquals($request->payload, array('request' => 'payload'));
+            PHPUnit_Framework_TestCase::assertEquals($request->headers, array('Foo' => 'Bar'));
+
             PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientResponse', $response);
+            PHPUnit_Framework_TestCase::assertEquals($response->status, 200);
+            PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
+            PHPUnit_Framework_TestCase::assertEquals($response->headers, array('X-PoweredBy' => 'Dreams'));
         });
     }
 }
