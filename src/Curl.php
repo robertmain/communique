@@ -64,11 +64,11 @@ class Curl {
 	 * @param  string $headerContent A header string
 	 * @return array An indexable array of headers
 	 */
-	private static function headers_to_array($headerContent){
+	private static function headers_to_array($headerContent) {
 		$headers = array();
 		$arrRequests = explode("\r\n\r\n", $headerContent);
-		foreach(explode("\r\n", $arrRequests[0]) as $i => $line){
-			if($i === 0){
+		foreach (explode("\r\n", $arrRequests[0]) as $i => $line) {
+			if ($i === 0) {
 				$headers['http_code'] = $line;
 			} else {
 				list($key, $value) = explode(': ', $line);
