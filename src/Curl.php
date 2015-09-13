@@ -30,14 +30,14 @@ class Curl {
 
 	/**
 	 * Constructs the cURL object wrapper
-	 * @param  string $url If provided, the **CURLOPT_URL** option will be set to its value. You can manually set this using the `setopt()` method.
 	 * @throws \Communique\CommuniqueRESTConnectionException
 	 */
-	public function __construct($url = null) {
+	public function __construct() {
 		if (!extension_loaded('curl')) {
 			throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->error() . ' cURL Error Code: ' . $this->errno());
 		} else {
 			$this->_ch = curl_init($url);
+			$this->setopt($this->_ch, CURLOPT_CAINFO, \Kdyby\CurlCaBundle\CertificateHelper::getCaInfoFile());
 		}
 	}
 
