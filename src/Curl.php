@@ -36,8 +36,8 @@ class Curl {
 		if (!extension_loaded('curl')) {
 			throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->error() . ' cURL Error Code: ' . $this->errno());
 		} else {
-			$this->_ch = curl_init($url);
-			$this->setopt($this->_ch, CURLOPT_CAINFO, \Kdyby\CurlCaBundle\CertificateHelper::getCaInfoFile());
+			$this->_ch = curl_init();
+			$this->setopt(CURLOPT_CAINFO, \Kdyby\CurlCaBundle\CertificateHelper::getCaInfoFile());
 		}
 	}
 
