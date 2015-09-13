@@ -10,6 +10,111 @@ class CurlExceptionTest extends PHPUnit_Framework_TestCase{
     	$this->http_client = new \Communique\CurlHTTPClient($this->curl);
 	}
 
+   	public function test_ssl_peer_certificate(){
+        $this->curl->expects($this->once())
+					->method('exec')
+					->will($this->returnCallback(function(){
+						return false;
+					}));
+
+		$this->curl->expects($this->once())
+					->method('errno')
+					->will($this->returnValue(CURLE_SSL_PEER_CERTIFICATE));
+        $request = new \Communique\RESTClientRequest('GET', 'https://domain.com/users', array(), array());
+        $this->setExpectedException('\Communique\CommuniqueRESTSSLException');
+        $this->http_client->request($request);
+    }
+
+   	public function test_ssl_engine_notfound(){
+        $this->curl->expects($this->once())
+					->method('exec')
+					->will($this->returnCallback(function(){
+						return false;
+					}));
+
+		$this->curl->expects($this->once())
+					->method('errno')
+					->will($this->returnValue(CURLE_SSL_ENGINE_NOTFOUND));
+        $request = new \Communique\RESTClientRequest('GET', 'https://domain.com/users', array(), array());
+        $this->setExpectedException('\Communique\CommuniqueRESTSSLException');
+        $this->http_client->request($request);
+    }
+
+   	public function test_ssl_engine_setfailed(){
+        $this->curl->expects($this->once())
+					->method('exec')
+					->will($this->returnCallback(function(){
+						return false;
+					}));
+
+		$this->curl->expects($this->once())
+					->method('errno')
+					->will($this->returnValue(CURLE_SSL_ENGINE_SETFAILED));
+        $request = new \Communique\RESTClientRequest('GET', 'https://domain.com/users', array(), array());
+        $this->setExpectedException('\Communique\CommuniqueRESTSSLException');
+        $this->http_client->request($request);
+    }
+
+   	public function test_ssl_cert_problem(){
+        $this->curl->expects($this->once())
+					->method('exec')
+					->will($this->returnCallback(function(){
+						return false;
+					}));
+
+		$this->curl->expects($this->once())
+					->method('errno')
+					->will($this->returnValue(CURLE_SSL_CERTPROBLEM));
+        $request = new \Communique\RESTClientRequest('GET', 'https://domain.com/users', array(), array());
+        $this->setExpectedException('\Communique\CommuniqueRESTSSLException');
+        $this->http_client->request($request);
+    } 
+
+   	public function test_ssl_cipher(){
+        $this->curl->expects($this->once())
+					->method('exec')
+					->will($this->returnCallback(function(){
+						return false;
+					}));
+
+		$this->curl->expects($this->once())
+					->method('errno')
+					->will($this->returnValue(CURLE_SSL_CIPHER));
+        $request = new \Communique\RESTClientRequest('GET', 'https://domain.com/users', array(), array());
+        $this->setExpectedException('\Communique\CommuniqueRESTSSLException');
+        $this->http_client->request($request);
+    }
+
+   	public function test_ssl_cacert(){
+        $this->curl->expects($this->once())
+					->method('exec')
+					->will($this->returnCallback(function(){
+						return false;
+					}));
+
+		$this->curl->expects($this->once())
+					->method('errno')
+					->will($this->returnValue(CURLE_SSL_CACERT));
+        $request = new \Communique\RESTClientRequest('GET', 'https://domain.com/users', array(), array());
+        $this->setExpectedException('\Communique\CommuniqueRESTSSLException');
+        $this->http_client->request($request);
+    }
+
+   	public function test_ssl_connect_error(){
+        $this->curl->expects($this->once())
+					->method('exec')
+					->will($this->returnCallback(function(){
+						return false;
+					}));
+
+		$this->curl->expects($this->once())
+					->method('errno')
+					->will($this->returnValue(CURLE_SSL_CONNECT_ERROR));
+        $request = new \Communique\RESTClientRequest('GET', 'https://domain.com/users', array(), array());
+        $this->setExpectedException('\Communique\CommuniqueRESTSSLException');
+        $this->http_client->request($request);
+    }
+
 	public function test_unsupported_protocol(){
 		$this->curl->expects($this->once())
 					->method('exec')

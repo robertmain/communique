@@ -18,6 +18,7 @@
     },
     "minimum-stability": "stable",
     "require": {
+        "kdyby/curl-ca-bundle": "~1.0"
     },
     "require-dev": {
         "phpdocumentor/phpdocumentor": "^2.8",
