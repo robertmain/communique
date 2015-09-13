@@ -37,7 +37,7 @@ class Curl {
 			throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->error() . ' cURL Error Code: ' . $this->errno());
 		} else {
 			$this->_ch = curl_init();
-			$this->setopt($this->_ch, CURLOPT_CAINFO, \Kdyby\CurlCaBundle\CertificateHelper::getCaInfoFile());
+			$this->setopt(CURLOPT_CAINFO, \Kdyby\CurlCaBundle\CertificateHelper::getCaInfoFile());
 		}
 	}
 
