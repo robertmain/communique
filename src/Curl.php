@@ -64,11 +64,11 @@ class Curl {
 	 * @param  string $headerContent A header string
 	 * @return array An indexable array of headers
 	 */
-	private static function headers_to_array($headerContent){
+	private static function headers_to_array($headerContent) {
 		$headers = array();
 		$arrRequests = explode("\r\n\r\n", $headerContent);
-		foreach(explode("\r\n", $arrRequests[0]) as $i => $line){
-			if($i === 0){
+		foreach (explode("\r\n", $arrRequests[0]) as $i => $line) {
+			if ($i === 0) {
 				$headers['http_code'] = $line;
 			} else {
 				list($key, $value) = explode(': ', $line);
@@ -245,7 +245,7 @@ class Curl {
 	 * Set an option for a cURL transfer
 	 * @see  http://php.net/manual/en/function.curl-setopt.php Official PHP documentation for curl_setopt()
 	 * @param  int $option The **CURLOPT_XXX**
-	 * @param  mixed $value The value to be set on option
+	 * @param  integer $value The value to be set on option
 	 * @return boolean Returns **TRUE** on success or **FALSE** on failure.
 	 */
 	public function setopt($option, $value) {
