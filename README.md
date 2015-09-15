@@ -1,5 +1,7 @@
 # Communique
 
+[![Join the chat at https://gitter.im/robertmain/communique](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/robertmain/communique?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/robertmain/communique.svg?branch=master)](https://travis-ci.org/robertmain/communique) 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/robertmain/communique/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/robertmain/communique/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/robertmain/communique/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/robertmain/communique/?branch=master)  
