@@ -20,12 +20,14 @@ namespace Communique;
  * This exception is thrown for connection errors when attempting to reach the API.
  * 
  */
-class CommuniqueRESTConnectionException extends \Communique\CommuniqueException {
-	/**
-	 * Constructor for REST Connection Exception
-	 * @param String $message A human readable description of the exception
-	 */
-	public function __construct($message) {
-		parent::__construct($message);
-	}
+class CommuniqueRESTConnectionException extends \Communique\CommuniqueException
+{
+    /**
+     * Constructor for REST Connection Exception
+     * @param String $message A human readable description of the exception
+     */
+    public function __construct($message)
+    {
+        parent::__construct($message);
+    }
 }

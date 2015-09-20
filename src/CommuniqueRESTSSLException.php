@@ -20,12 +20,14 @@ namespace Communique;
  * This exception is thrown for errors related to SSL such as certificate errors, key errors etc.
  * 
  */
-class CommuniqueRESTSSLException extends \Communique\CommuniqueException {
-	/**
-	 * Constructor for REST SSL Exception
-	 * @param String $message A human readable description of the exception
-	 */
-	public function __construct($message) {
-		parent::__construct($message);
-	}
+class CommuniqueRESTSSLException extends \Communique\CommuniqueException
+{
+    /**
+     * Constructor for REST SSL Exception
+     * @param String $message A human readable description of the exception
+     */
+    public function __construct($message)
+    {
+        parent::__construct($message);
+    }
 }

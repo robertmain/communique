@@ -12,6 +12,7 @@
  */
 
 namespace Communique;
+
 use \Exception;
 
 /**
@@ -21,12 +22,14 @@ use \Exception;
  * This exception is thrown when problems within the library occur. For example, an interceptor that does not implement the Interceptor interface
  * 
  */
-class CommuniqueException extends \Exception {
-	/**
-	 * Constructor for general purpose exception
-	 * @param String $message A human readable description of the exception
-	 */
-	public function __construct($message) {
-		parent::__construct($message);
-	}
+class CommuniqueException extends \Exception
+{
+    /**
+     * Constructor for general purpose exception
+     * @param String $message A human readable description of the exception
+     */
+    public function __construct($message)
+    {
+        parent::__construct($message);
+    }
 }

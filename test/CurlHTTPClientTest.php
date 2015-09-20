@@ -1,11 +1,12 @@
 <?php
 
-class CurlHTTPClientTest extends PHPUnit_Framework_TestCase{
-
+class CurlHTTPClientTest extends PHPUnit_Framework_TestCase
+{
     private $_curlopts;
         
-    public function setUp(){
-    	$this->curl = $this->getMockBuilder('\Communique\Curl')
+    public function setUp()
+    {
+        $this->curl = $this->getMockBuilder('\Communique\Curl')
                             ->setMethods(array('exec', 'setopt_array', 'setopt'))
                             ->disableOriginalConstructor()
                             ->getMock();
@@ -14,22 +15,23 @@ class CurlHTTPClientTest extends PHPUnit_Framework_TestCase{
         $curlopts = &$this->_curlopts;
 
         $this->curl->method('setopt')
-                    ->will($this->returnCallback(function($curlopt, $value) use (&$curlopts){
+                    ->will($this->returnCallback(function ($curlopt, $value) use (&$curlopts) {
                         $curlopts[$curlopt] = $value;
                     }));
 
         $this->curl->method('setopt_array')
-                    ->will($this->returnCallback(function($optarray) use (&$curlopts){
-                        foreach($optarray as $optkey => $optvalue){
+                    ->will($this->returnCallback(function ($optarray) use (&$curlopts) {
+                        foreach ($optarray as $optkey => $optvalue) {
                             $curlopts[$optkey] = $optvalue;
                         }
                     }));
     }
 
-    public function test_get(){
+    public function test_get()
+    {
         $this->curl->expects($this->once())
                     ->method('exec')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return array(
                             'http_status_code' => 200,
                             'body' => 'response+payload',
@@ -50,10 +52,11 @@ class CurlHTTPClientTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($this->_curlopts[CURLOPT_HTTPHEADER], array('Example: header'));
     }
 
-    public function test_put(){
+    public function test_put()
+    {
         $this->curl->expects($this->once())
                     ->method('exec')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return array(
                             'http_status_code' => 200,
                             'body' => 'response+payload',
@@ -77,10 +80,11 @@ class CurlHTTPClientTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($this->_curlopts[CURLOPT_HTTPHEADER], array('Example: header'));
     }
 
-    public function test_post(){
+    public function test_post()
+    {
         $this->curl->expects($this->once())
                     ->method('exec')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return array(
                             'http_status_code' => 200,
                             'body' => 'response+payload',
@@ -104,11 +108,11 @@ class CurlHTTPClientTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($this->_curlopts[CURLOPT_HTTPHEADER], array('Example: header'));
     }
 
-    public function test_delete(){
-
+    public function test_delete()
+    {
         $this->curl->expects($this->once())
                     ->method('exec')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return array(
                             'http_status_code' => 200,
                             'body' => 'response+payload',
@@ -129,10 +133,11 @@ class CurlHTTPClientTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($this->_curlopts[CURLOPT_HTTPHEADER], array('Example: header'));
     }
 
-    public function test_empty_get_payload(){
+    public function test_empty_get_payload()
+    {
         $this->curl->expects($this->once())
                     ->method('exec')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return array(
                             'http_status_code' => 200,
                             'body' => 'response+payload',
@@ -153,10 +158,11 @@ class CurlHTTPClientTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($this->_curlopts[CURLOPT_HTTPHEADER], array());
     }
 
-    public function test_empty_put_payload(){
+    public function test_empty_put_payload()
+    {
         $this->curl->expects($this->once())
                     ->method('exec')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return array(
                             'http_status_code' => 200,
                             'body' => 'response+payload',
@@ -180,10 +186,11 @@ class CurlHTTPClientTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($this->_curlopts[CURLOPT_HTTPHEADER], array());
     }
 
-    public function test_empty_post_payload(){
+    public function test_empty_post_payload()
+    {
         $this->curl->expects($this->once())
                     ->method('exec')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return array(
                             'http_status_code' => 200,
                             'body' => 'response+payload',
@@ -207,10 +214,11 @@ class CurlHTTPClientTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($this->_curlopts[CURLOPT_HTTPHEADER], array());
     }
 
-    public function test_empty_delete_payload(){
+    public function test_empty_delete_payload()
+    {
         $this->curl->expects($this->once())
                     ->method('exec')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return array(
                             'http_status_code' => 200,
                             'body' => 'response+payload',

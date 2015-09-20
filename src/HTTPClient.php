@@ -20,15 +20,13 @@ namespace Communique;
  * This interface is used to describe the functionality of an http client
  * 
  */
-interface HTTPClient {
-
-
-	/**
-	 * Make an HTTP request using the information provided in the RESTClientRequest object
-	 * 
-	 * @param  RESTClientRequest $request Request encapsulation object
-	 * @return RESTClientResponse         Response encapsulation object
-	 */
-	public function request(\Communique\RESTClientRequest $request);
-
+interface HTTPClient
+{
+    /**
+     * Make an HTTP request using the information provided in the RESTClientRequest object
+     * 
+     * @param  RESTClientRequest $request Request encapsulation object
+     * @return RESTClientResponse         Response encapsulation object
+     */
+    public function request(\Communique\RESTClientRequest $request);
 }

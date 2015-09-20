@@ -1,18 +1,20 @@
 <?php
 
-class CommuniqueTest extends PHPUnit_Framework_TestCase{
-        
-    public function setUp(){
-    	$this->http = $this->getMockBuilder('\Communique\HTTPClient')
+class CommuniqueTest extends PHPUnit_Framework_TestCase
+{
+    public function setUp()
+    {
+        $this->http = $this->getMockBuilder('\Communique\HTTPClient')
                             ->setMethods(array('request'))
                             ->getMock();
-    	$this->rest = new \Communique\Communique('http://domain.com/', array(), $this->http);
+        $this->rest = new \Communique\Communique('http://domain.com/', array(), $this->http);
     }
 
-    public function test_get(){
+    public function test_get()
+    {
         $this->http->expects($this->once())
                     ->method('request')
-                    ->will($this->returnCallback(function($request){
+                    ->will($this->returnCallback(function ($request) {
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'GET');
                         PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
@@ -25,10 +27,11 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($response->headers, array('X-PoweredBy' => 'Dreams'));
     }
 
-    public function test_put(){
+    public function test_put()
+    {
         $this->http->expects($this->once())
                     ->method('request')
-                    ->will($this->returnCallback(function($request){
+                    ->will($this->returnCallback(function ($request) {
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'PUT');
                         PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
@@ -41,10 +44,11 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($response->headers, array('X-PoweredBy' => 'Dreams'));
     }
 
-    public function test_post(){
+    public function test_post()
+    {
         $this->http->expects($this->once())
                     ->method('request')
-                    ->will($this->returnCallback(function($request){
+                    ->will($this->returnCallback(function ($request) {
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'POST');
                         PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
@@ -57,10 +61,11 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($response->headers, array('X-PoweredBy' => 'Dreams'));
     }
 
-    public function test_delete(){
+    public function test_delete()
+    {
         $this->http->expects($this->once())
                     ->method('request')
-                    ->will($this->returnCallback(function($request){
+                    ->will($this->returnCallback(function ($request) {
                         PHPUnit_Framework_TestCase::assertEquals($request->method, 'DELETE');
                         PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/' . 'users');
                         PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
@@ -73,9 +78,10 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         PHPUnit_Framework_TestCase::assertEquals($response->headers, array('X-PoweredBy' => 'Dreams'));
     }
 
-    public function test_request_interceptor(){
+    public function test_request_interceptor()
+    {
         $this->http->method('request')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return new \Communique\RESTClientResponse(200, 'response+payload', array());
                     }));
 
@@ -87,7 +93,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         //Set out the expectations for the stubbed request method
         $mockInterceptor->expects($this->once())
                         ->method('request')
-                        ->will($this->returnCallback(function($request){
+                        ->will($this->returnCallback(function ($request) {
                             PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
                             PHPUnit_Framework_TestCase::assertEquals($request->payload, 'request+payload');
                             return $request;
@@ -102,9 +108,10 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         $rest->get('users', 'request+payload');
     }
 
-    public function test_response_interceptor(){        
+    public function test_response_interceptor()
+    {
         $this->http->method('request')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return new \Communique\RESTClientResponse(200, 'response+payload', array());
                     }));
         //Create the mock interceptor
@@ -119,7 +126,7 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         //Set out the expectations for the stubbed request method
         $mockInterceptor->expects($this->once())
                         ->method('response')
-                        ->will($this->returnCallback(function($response){
+                        ->will($this->returnCallback(function ($response) {
                             PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientResponse', $response);
                             PHPUnit_Framework_TestCase::assertEquals($response->payload, 'response+payload');
                             return $response;
@@ -128,18 +135,20 @@ class CommuniqueTest extends PHPUnit_Framework_TestCase{
         $rest->get('users', 'request+payload');
     }
 
-    public function test_interceptor_type_checking(){
+    public function test_interceptor_type_checking()
+    {
         $this->setExpectedException('\Communique\CommuniqueException');
         $rest = new \Communique\Communique('http://domain.com/', array('bad value'), $this->http);
     }
 
-    public function test_debug_function_is_called(){
+    public function test_debug_function_is_called()
+    {
         $this->http->method('request')
-                    ->will($this->returnCallback(function(){
+                    ->will($this->returnCallback(function () {
                         return new \Communique\RESTClientResponse(200, 'response+payload', array('X-PoweredBy' => 'Dreams'));
                     }));
         $rest = new \Communique\Communique('http://domain.com/', array(), $this->http);
-        $rest->get('users', array('request' => 'payload'), array('Foo' => 'Bar'), function($request, $response){
+        $rest->get('users', array('request' => 'payload'), array('Foo' => 'Bar'), function ($request, $response) {
             PHPUnit_Framework_TestCase::assertInstanceOf('\Communique\RESTClientRequest', $request);
             PHPUnit_Framework_TestCase::assertEquals($request->url, 'http://domain.com/users');
             PHPUnit_Framework_TestCase::assertEquals($request->payload, array('request' => 'payload'));
