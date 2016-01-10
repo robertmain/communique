@@ -124,17 +124,14 @@ class CurlHTTPClient implements HTTPClient {
 				case CURLE_SSL_CACERT:
 				case CURLE_SSL_CONNECT_ERROR:
 					throw new \Communique\CommuniqueRESTSSLException('cURL SSL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $curl_error);
-				break;
 
 				case CURLE_UNSUPPORTED_PROTOCOL:
 				case CURLE_COULDNT_CONNECT:
 				case CURLE_COULDNT_RESOLVE_HOST:
 					throw new \Communique\CommuniqueRESTConnectionException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $curl_error);
-				break;
 
 				default:
 					throw new \Communique\CommuniqueRESTException('cURL Error: ' . $this->curl->error() . ' cURL Error Code: ' . $curl_error);
-				break;
 			}
 		} else {
 			return new \Communique\RESTClientResponse(
