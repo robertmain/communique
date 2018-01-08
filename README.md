@@ -13,12 +13,14 @@
 [![Monthly Downloads](https://poser.pugx.org/robertmain/communique/d/monthly)](https://packagist.org/packages/robertmain/communique)
 [![Daily Downloads](https://poser.pugx.org/robertmain/communique/d/daily)](https://packagist.org/packages/robertmain/communique)
 
-##What is it?
+## What is it?
+
 A flexible pluggable REST client using middleware. The aim of this project is to provide a REST client that is flexible enough to permit the modification of the request and response using request and response interceptors(conceptually similar to AngularJS, although implemented somewhat differently).
 
-##Usage
+## Usage
 
-###Typical Usage
+### Typical Usage
+
 You can make a request with the REST library using the code below. It is worth noting, the get, put, post, delete etc. methods 
 do not return the raw response payload, but an encapsulation object of type [\Communique\RESTClientResponse](http://robertmain.github.io/communique/classes/Communique.RESTClientResponse.html). This object contains
 
@@ -30,18 +32,20 @@ You can find more information from the [\Communique\RESTClientResponse](http://r
 
 ```php
 <?php
-     $rest = new \Communique\Communique('http://api.company.com/');
-     $response = $rest->get('users/1'); //Contains information about user number 1
-     // Since $response is actually a RESTClientResponse object (rather than the raw response payload), we can get
-     // properties of the request like so:
-     echo $response->status; //This will be the HTTP status code
-     // If we want the raw request payload we do this:
-     echo $response->payload;
-     // Headers can be retrieved like so:
-     echo $response->getHeader('header_key');
+    $rest = new \Communique\Communique('http://api.company.com/');
+    $response = $rest->get('users/1'); //Contains information about user number 1
+    // Since $response is actually a RESTClientResponse object (rather than the raw response payload), we can get
+    // properties of the request like so:
+    echo $response->status; //This will be the HTTP status code
+    // If we want the raw request payload we do this:
+    echo $response->payload;
+    // Headers can be retrieved like so:
+    echo $response->getHeader('header_key');
 ?>
 ```
-###Request Interceptors
+
+### Request Interceptors
+
 Whilst the above example is useful for making simple requests and returning the result from the API,
 you may wish to have a little more control over the request. Communique provides a method to do this using Interceptors. 
 An interceptor is a class with request and response methods. The request method of each interceptor is called on each request
@@ -57,9 +61,12 @@ argumment to Communique. Interceptors should implement the [\Communique\Intercep
      // Use the library as before
 ?>
 ```
-###Custom HTTP Client
+
+### Custom HTTP Client
+
 This library ships out of the box with a cURL implementation, however if you wish to provide your own you may do so
 using the third constructor argument as follows:
+
 ```php
 <?php
     $rest = new \Communique\Communique('http://api.company.com/', array(new JSONParser(), new OAuth()), new CustomHTTPClient());
@@ -67,11 +74,14 @@ using the third constructor argument as follows:
 ?>
 ```
 
-##Licensing
+## Licensing
+
 Licensed under the GPL - please see the file called LICENSE for more info.
 
-##Contacts
+## Contacts
+
 - If you want to submit a bug report or issue, please do so using the issue tracker on GitHub
 
-##Documentation
+## Documentation
+
 The documentation can be found [here](http://robertmain.github.io/communique)
